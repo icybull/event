@@ -40,7 +40,9 @@
 
     <main>
         <div class="event-detail-title">
-            <span class="date-count" th:text="'D-' + ${event.eventIng}"></span>
+            <th:block th:unless="${event.eventIng == 'N'}">
+                <span class="date-count" th:text="'D-' + ${event.eventIng}"></span>
+            </th:block>
             <h3 class="event-title">[[${event.title}]] 체험단 모집</h3>
         </div>
         <div class="event-short-info">
@@ -80,7 +82,7 @@
             <ul>
                 <li class="rel-item-1-area">
                     <a class="rel-item-1" href="#">
-                        <img class="rel-item-img-1" src="/220726_dwmall_2p/images/gosomayo_big.jpg" alt="고소마요">
+                        <img class="rel-item-img-1" src="/images/event_3/gosomayo_big.jpg" alt="고소마요">
                     </a>
                     <p class="rel-item-name-1 fl">동원참치 튜나페<br>고소마요 x3개</p>
                     <strong class="rel-item-price-1 fl">
@@ -95,7 +97,7 @@
                 </li>
                 <li class="rel-item-2-area">
                     <a class="rel-item-2" href="#">
-                        <img class="rel-item-img-2" src="/220726_dwmall_2p/images/maecommayo_big.jpg" alt="매콤마요">
+                        <img class="rel-item-img-2" src="/images/event_3/maecommayo_big.jpg" alt="매콤마요">
                     </a>
                     <p class="rel-item-name-2 fl">동원참치 튜나페<br>매콤마요 x3개</p>
                     <strong class="rel-item-price-2 fl">
@@ -106,7 +108,7 @@
                 </li>
                 <li class="rel-item-1-area">
                     <a class="rel-item-1" href="#">
-                        <img class="rel-item-img-1" src="/220726_dwmall_2p/images/gosomayo_big.jpg" alt="고소마요">
+                        <img class="rel-item-img-1" src="/images/event_3/gosomayo_big.jpg" alt="고소마요">
                     </a>
                     <p class="rel-item-name-1 fl">동원참치 튜나페<br>고소마요 x3개</p>
                     <strong class="rel-item-price-1 fl">
@@ -114,13 +116,14 @@
                         <span>원</span>
                     </strong>
                     <a class="rel-item-cart" href="#">
-                            <span class="material-symbols-outlined cart-cir-icon-1">
-                                shopping_cart
-                            </span>
+                        <span class="material-symbols-outlined cart-cir-icon-1">shopping_cart</span>
                     </a>
                 </li>
             </ul>
         </div>
+
+
+
         <form id="frm3" action="" method="post">
             <div class="popup-wrap" id="popup">
                 <div class="popup">
@@ -157,7 +160,7 @@
         </div>
         <th:block th:if="${event.eventIng == 'N'}">
             <!-- 응모 마감 -->
-            <div class="vote-status-btn"><a class="vote-end-btn" href="#">응모 마감</a></div>
+            <div class="vote-status-btn"><a class="vote-end-btn">응모 마감</a></div>
             <h2 class="comment-title comment-input-area">댓글 (<span class="comment-count-num">[[${totalCnt}]]</span>)</h2>
         </th:block>
         <th:block th:unless="${event.eventIng == 'N'}">
@@ -174,7 +177,7 @@
                 <th:block th:if="${session.isReg == 'T'}">
                     <!-- 응모 완료 -->
                     <div class="vote-status-btn">
-                        <a class="vote-complete-btn" href="#">
+                        <a class="vote-complete-btn">
                             <span>응모 완료</span>
                             <span class="material-symbols-outlined check-icon">check_circle</span>
                         </a>
@@ -213,7 +216,15 @@
                 <p class="see-my-cmt">내 댓글 보기</p>
             </div>
             <div class='see-my-cmt-btn'>
-                <input type="checkbox" id="toggle" hidden>
+                <th:block th:unless="${event.eventIng == 'N'}">
+                    <th:block th:if="${session.user_Seq} == null">
+                        <input type="checkbox" id="toggle" hidden onclick="popUp()">
+                    </th:block>
+                    <th:block th:unless="${session.user_Seq == null}">
+                        <input type="checkbox" id="toggle" hidden onclick="myContent()">
+                    </th:block>
+                </th:block>
+
                 <label for="toggle" class="toggleSwitch">
                     <span class="toggleButton"></span>
                 </label>

@@ -55,7 +55,9 @@
                         <a th:href="'/experienceForm.do?event_Seq=' + ${mainEvent.event_Seq} + '&page=0&myContent=0'">
                             <img th:src="'/images/event_3/' + ${mainEvent.img_Nm} + '.jpg'" alt="동원참치 튜나페 고소마요&매콤마요 체험단 모집">
                         </a>
-                        <span class="date-count1" th:text="'D-' + ${mainEvent.eventIng}"></span>
+                        <th:block th:unless="${mainEvent.eventIng == 'N'}">
+                            <span class="date-count1" th:text="'D-' + ${mainEvent.eventIng}"></span>
+                        </th:block>
                     </li>
                 </th:block>
             </ul>
@@ -144,11 +146,11 @@
     </footer>
     <aside class="bottom-tab">
         <section class="bottom-menu">
-            <a href="#"><img src="/images/event_3/menu_category.png" alt="카테고리"></a>
-            <a href="#"><img src="/images/event_3/menu_foryou.png" alt="Foryou"></a>
-            <a href="#"><img src="/images/event_3/menu_home.png" alt="홈"></a>
-            <a href="#"><img src="/images/event_3/menu_my.png" alt="마아페이지"></a>
-            <a href="#"><img src="/images/event_3/menu_view.png" alt="최근 본 상품"></a>
+            <a href="#"><img src="/images/event_3/menu_category_2.png" alt="카테고리"></a>
+            <a href="#"><img src="/images/event_3/menu_foryou_2.png" alt="Foryou"></a>
+            <a href="#"><img src="/images/event_3/menu_home_2.png" alt="홈"></a>
+            <a href="#"><img src="/images/event_3/menu_my_2.png" alt="마아페이지"></a>
+            <a href="#"><img src="/images/event_3/menu_view_2.png" alt="최근 본 상품"></a>
         </section>
     </aside>
 </div>
