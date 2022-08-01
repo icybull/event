@@ -1,0 +1,79 @@
+
+.popup-wrap {
+    background-color: rgba(0, 0, 0, .7);
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: none;
+    padding: 15px;
+}
+
+.popup-wrap .popup {
+    width: 100%;
+    max-width: 400px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    overflow: hidden;
+    background-color: #0066FF;
+    box-shadow: 5px 10px 10px 1px rgba(0, 0, 0, .3);
+}
+
+.popup-wrap .popup .popup-head {
+    width: 100%;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.popup-wrap .popup .popup-head .head-title {
+    color: #ffffff;
+    font-size: 38px;
+    font-weight: 550;
+    letter-spacing: -3px;
+    text-align: center;
+}
+
+.popup-wrap .popup .popup-body {
+    width: 100%;
+    background-color: #ffffff;
+}
+
+.popup-wrap .popup .popup-body .body-content {
+    width: 100%;
+    padding: 30px;
+}
+
+.popup-wrap .popup .popup-body .body-content input {
+    display: block;
+    margin-bottom: 25px;
+    border: none;
+    background-color: #ededed;
+    padding: 0 20px;
+    width: 250px;
+    height: 50px;
+}
+
+.popup-wrap .popup .popup-footer {
+    width: 100%;
+    height: 50px;
+}
+
+.popup-wrap .popup .popup-footer .popup-btn {
+    display: inline-flex;
+    width: 50%;
+    height: 100%;
+    float: left;
+    justify-content: center;
+    align-items: center;
+    color: #ffffff;
+    cursor: pointer;
+}
+
+.popup-wrap .popup .popup-footer .confirm {
+    border-right: 1px solid #3b5fbf;
+}

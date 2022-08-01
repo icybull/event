@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>체험단이벤트</title>
+    <link rel="stylesheet" href="/css/event_1/plugin/reset.css">
+    <link rel="stylesheet" href="/css/event_1/plugin/common.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="/css/event_1/plugin/slick.css">
+    <link rel="stylesheet" href="/css/event_1/page02.css">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/8.3.1/swiper-bundle.css"/>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+            integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+            crossorigin="anonymous"></script>
+    <!--    <script src="/js/event_1/plugin/jquery-1.8.1.min.js"></script>-->
+    <script src="/js/event_1/plugin/slick.min.js"></script>
+    <script src="/js/event_1/plugin/easing.js"></script>
+    <script src="/js/experience.js"></script>
+
+</head>
+
+<body>
+
+<!--<div class="posNum"></div>-->
+
+
+<section id="container">
+
+    <a href="#top"><button class="startPoint"><img src="/images/event_1/page02_section01/button.png" alt=""></button></a>
+
+
+    <!-- 상단 헤더 아이콘/ 상단 슬라이드 배너 섹션-->
+    <section id="section01">
+        <section id="header">
+            <div class="iconbox">
+                <a href="/event/main.do?E_CNT=6&version=1"><div><img src="/images/event_1/page02_header/icon01.png" alt=""></div></a>
+                <div class="title">체험단</div>
+            </div>
+        </section>
+        <div class="textbox">
+            <th:block th:if="${event.eventIng == 'N'}">
+                <div class="text01"><img src="/images/event_1/page02_section01/button_end.png" alt=""></div>
+            </th:block>
+            <th:block th:unless="${event.eventIng == 'N'}">
+                <div class="text01"><img src="/images/event_1/page02_section01/button_ing.png" alt=""></div>
+            </th:block>
+            <div class="text02">[체험단 모집]<br>
+                [[${event.title}]]
+            </div>
+            <div class="icon">
+                <div><img src="/images/event_1/page02_header/icon02.png" alt=""></div>
+                <div><img src="/images/event_1/page02_header/icon03.png" alt=""></div>
+            </div>
+        </div>
+        <th:block th:unless="${event.eventIng == 'N'}">
+            <div class="dday" th:text="'D-' + ${event.eventIng}"></div>
+        </th:block>
+        <div class="visual_slider">
+            <div><img class="banner" src="/images/event_1/page02_header/banner-img01.jpg"></div>
+            <div><img class="banner" src="/images/event_1/page02_header/banner-img02.jpg"></div>
+            <div><img class="banner" src="/images/event_1/page02_header/banner-img03.jpg"></div>
+            <div><img class="banner" src="/images/event_1/page02_header/banner-img04.jpg"></div>
+        </div>
+    </section>
+
+
+
+    <!--상세페이지 콘텐츠-->
+    <section id="section02">
+        <div id="bottom_menu">
+            <div class="textbox">
+                <a href="#section02" id="scroll_move01"><div id="page_1" class="ov" onclick="BTN_1()">상세보기</div></a>
+                <a href="#section02" id="scroll_move02"><div id="page_2" onclick="BTN_2()">응모방법</div></a>
+                <a href="#section02" id="scroll_move03"><div id="page_3" onclick="BTN_3()">리뷰 작성 안내</div></a>
+            </div>
+            <div class="line_1"><img src="/images/event_1/page02_section01/line.png" alt=""></div>
+            <div class="line_2" style="display: none;"><img src="/images/event_1/page02_section01/line.png" alt=""></div>
+            <div class="line_3" style="display: none;"><img src="/images/event_1/page02_section01/line02.png" alt=""></div>
+        </div>
+        <div class="all">
+            <div class="reward">
+                <div class="coin"><img src="/images/event_1/page02_section01/coin.png" alt=""></div>
+                우수 리뷰 리워드 <em>총 3명!</em>
+            </div>
+            <div id="content_1"><img class="content" src="/images/event_1/page02_section01/page01.jpg" alt=""></div>
+            <div id="content_2" style="display: none;"><img class="content" src="/images/event_1/page02_section01/page02.jpg" alt=""></div>
+            <div id="content_3" style="display: none;"><img class="content" src="/images/event_1/page02_section01/page03.jpg" alt=""></div>
+            <div class="bottomline"><img src="/images/event_1/page02_section01/bottomline.png" alt=""></div>
+        </div>
+    </section>
+
+
+
+    <!--관련상품/연관상품 섹션-->
+    <section id="section03">
+
+        <div class="text">관련상품</div>
+        <div class="box01" th:text="${prodCnt} + '개'"></div>
+        <div class="line02"><img src="/images/event_1/page02_section02/line02.png" alt=""></div>
+
+        <div class="swiper">
+            <div class="swiper-wrapper" style="margin-left: 22px;">
+                <th:block th:each="prod : ${prodList}">
+                    <div class="swiper-slide" style="width: 149px; margin-right: 11px;">
+                        <div class="box">
+                            <div class="icon"><img src="/images/event_1/page02_section02/icon.png" alt=""></div>
+                            <a th:href="'https://m.dongwonmall.com/product/detail.do?productId=' + ${prod.productId}">
+                                <img th:src="'/images/event_1/page02_section02/' + ${prod.img_Nm} + '.png'"/>
+                            </a>
+                            <div class="text01">
+                                <p class="t01" th:text="${prod.product_Nm}"></p>
+                                <p class="t02" th:text="${prod.price} + '원'"></p>
+                            </div>
+                        </div>
+                    </div>
+                </th:block>
+            </div>
+        </div>
+
+        <div class="line"><img src="/images/event_1/page02_section02/line.png" alt=""></div>
+
+        <div class="text04">이런 상품은 어때요?</div>
+        <div class="line03"><img src="/images/event_1/page02_section02/line02.png" alt=""></div>
+
+
+        <div id="restProdTable">
+            <form id="frm4" action="" method="get" >
+                <input type="hidden" name="event_Seq" th:value="${event.event_Seq}"/>
+                <input type="hidden" id="refreshNum" name="refreshNum" th:value="${refreshNum}">
+                <input type="hidden" name="page" th:value="${page}"/>
+                <input type="hidden" name="myContent" th:value="${myContent}"/>
+                <div class="product-box">
+                    <th:block th:each="restProd : ${restProdList}">
+
+                        <div class="product_list">
+                            <div class="numicon" th:text="${restProd.prod_Seq}"></div>
+                            <a th:href="'https://m.dongwonmall.com/product/detail.do?productId=' + ${restProd.productId}"><img th:src="'/images/event_1/page02_section02/' + ${restProd.img_Nm} + '.jpg'" alt=""></a>
+                            <div class="product_txt">
+                                <p class="t01" th:text="${restProd.product_Nm}"></p>
+                                <p class="t02" th:text="${restProd.price} + '원'"></p>
+                            </div>
+                        </div>
+
+                    </th:block>
+                </div>
+                <div class="product_box_button" onclick="refreshRestProd()">
+                    <img src="/images/event_1/page02_section02/icon02.png" alt="">
+                    <em>새로보기 [[${refreshNum}]]</em>/3
+                </div>
+            </form>
+        </div>
+
+
+        <div class="product-box-line"><img src="/images/event_1/page02_section02/line.png" alt=""></div>
+
+    </section>
+
+    <!--댓글 섹션-->
+    <section id="section04">
+
+
+        <!--   사용자 등록 모달 팝업   -->
+        <form class="d" id="frm3" action="" method="post">
+            <div class="popup-wrap" id="popup">
+                <div class="popup-container">
+                    <span class="popup-btn" onclick="modalClose()"><img src="/images/event_1/page02_section03/pop-btn.png" alt=""></span>
+                    <div class="popup">
+                        <div class="popup-head">
+                            <span class="head-title">본인 확인을 위해 <br><em>이름, 휴대폰 번호</em>를 입력해주세요!</span>
+                        </div>
+                        <div class="popup-body">
+                            <div class="body-content">
+                                <label for="name">이름</label>
+                                <input style="padding-left: 10px;" type="text" id="name" name="name" placeholder="본인 이름" >
+                                <label for="phone_No">휴대폰 번호</label>
+                                <input style="padding-left: 10px;" type="text" id="phone_No" name="phone_No" placeholder="010-1234-5678">
+                            </div>
+                        </div>
+                        <div class="popup-footer">
+                            <span class="popup-btn confirm" onclick="regUser()">참여하기</span>
+                        </div>
+                        <div class="bottomtext">참여 완료시, 개인 정보 수집에 동의한 것으로 간주합니다.</div>
+                    </div>
+                </div>
+            </div>
+        </form>
+
+        <div id="contentTable">
+            <div class="text">댓글</div>
+            <div class="box01" th:text="${totalCnt} + '개'"></div>
+            <div class="mycomment">내 댓글 보기</div>
+            <th:block th:if="${event.eventIng == 'N'}">
+                <div class="mycomment_button"></div>
+            </th:block>
+            <th:block th:unless="${event.eventIng == 'N'}">
+                <th:block th:if="${session.user_Seq == null}">
+                    <div class="mycomment_button" onclick="popUp()"></div>
+                </th:block>
+                <th:block th:unless="${session.user_Seq == null}">
+                    <th:block th:if="${myContent == 0}">
+                        <div class="mycomment_button" onclick="myContent()"></div>
+                    </th:block>
+                    <th:block th:unless="${myContent == 0}">
+                        <div class="mycomment_button_on" onclick="myContent()"></div>
+                    </th:block>
+                </th:block>
+            </th:block>
+            <div class="line02"><img src="/images/event_1/page02_section02/line02.png" alt=""></div>
+
+
+
+            <th:block th:if="${event.eventIng == 'N'}">
+                <!-- 응모 마감 -->
+                <div class="commentbox-button"><img src="/images/event_1/page02_section03/button02.png" alt=""></div>
+            </th:block>
+            <th:block th:unless="${event.eventIng == 'N'}">
+                <!--  로그인 정보 유무 확인  -->
+                <th:block th:if="${session.user_Seq} == null">
+                    <!-- 체험단 리뷰 참여하기 -->
+                    <div class="commentbox-button"  onclick="popUp()"><img src="/images/event_1/page02_section03/button.png" alt=""></div>
+                </th:block>
+                <th:block th:unless="${session.user_Seq} == null">
+                    <!--   기존 사용자   -->
+                    <th:block th:if="${session.isReg == 'T'}">
+                        <!-- 응모 완료 -->
+                        <div class="commentbox-button"><img src="/images/event_1/page02_section03/button01.png" alt=""></div>
+                    </th:block>
+                    <!--   신규 사용자   -->
+                    <th:block th:unless="${session.isReg == 'T'}">
+                        <form id="frm" method="post" action="">
+                            <input type="hidden" id="event_Seq" name="event_Seq" th:value="${event.event_Seq}"/>
+                            <input type="hidden" id="user_Seq" name="user_Seq" th:value="${session.user_Seq}"/>
+                            <div class="reply-write">
+                                <textarea id="content" name="content" style="width: 293px; height: 120px; padding: 10px 10px;" class="commentbox" placeholder="SNS 또는 블로그 주소와 응모 사유를 작성해주세요." onkeyup="lenthCheck()"></textarea>
+                                <span class="write-cnt" id="textLengthCheck"> 0 / 500자</span>
+                            </div>
+                            <div class="commentbox-button" onclick="contentReg()"><img src="/images/event_1/page02_section03/button03.png" alt=""></div>
+                        </form>
+                    </th:block>
+                </th:block>
+            </th:block>
+
+
+            <div class="commentbox-line"><img src="/images/event_1/page02_section02/line.png" alt=""></div>
+
+            <form id="frm2" method="get" action="">
+                <!--댓글 보이는 부분 시작-->
+                <div id="comment-view">
+                    <div class="comment" th:each="content : ${contentList}">
+                        <div class="profile"><img th:src="'/images/event_1/page02_section03/'+ ${content.grd_Nm} +'.png'" alt=""></div>
+                        <div class="textbox">
+                            <div class="text01">
+                                <div class="name" th:text="${content.name}"></div>
+                                <th:block th:unless="${event.eventIng == 'N'}">
+                                    <th:block th:unless="${session.user_Seq} == null">
+                                        <div class="delete"><img th:if="${session.user_Seq == content.user_Seq}" th:onclick="|javascript:delContent('${session.user_Seq}')|" src="images/event_1/page02_section03/delet-button.png" alt=""></div>
+                                    </th:block>
+                                </th:block>
+
+                                <div class="date" th:text="${content.reg_Datetime}"></div>
+                            </div>
+                            <div class="text02" th:text="${content.content}"></div>
+                            <div class="line03"><img src="/images/event_1/page02_section03/line02.png" alt=""></div>
+                        </div>
+                    </div>
+                </div>
+                <input type="hidden" name="event_Seq" th:value="${event.event_Seq}"/>
+                <input type="hidden" id="page" name="page" value=""/>
+                <input type="hidden" id="myContent" name="myContent" th:value="${myContent}"/>
+                <div class="comment-num" th:with="startPage=${page-(page%5)}">
+                    <th:block th:if="${page == 0}">
+                        <img src="/images/event_1/page02_section03/arrow_left.png" alt="">
+                    </th:block>
+                    <th:block th:unless="${page == 0}">
+                        <img src="/images/event_1/page02_section03/arrow_left.png" alt="" th:onclick="|javascript:pageLoad('${page-1}')|">
+                    </th:block>
+
+                    <th:block th:each="i : ${#numbers.sequence(0,4)}">
+                        <th:block th:if="${i+startPage < totalPage}">
+                            <th:block th:if="${page == i+startPage}">
+                                <div class="ov" style="cursor:pointer" th:onclick="|javascript:pageLoad('${i+startPage}')|">[[${i+startPage+1}]]<img src="/images/event_1/page02_section03/ov_line.png" alt=""></div>
+                            </th:block>
+                            <th:block th:unless="${page == i+startPage}">
+                                <div style="cursor:pointer" th:text="${i+startPage+1}" th:onclick="|javascript:pageLoad('${i+startPage}')|"></div>
+                            </th:block>
+                        </th:block>
+                    </th:block>
+
+                    <th:block th:if="${page+1<totalPage}">
+                        <img src="/images/event_1/page02_section03/arrow_right.png" alt="" th:onclick="|javascript:pageLoad('${page+1}')|">
+                    </th:block>
+                    <th:block th:unless="${page+1<totalPage}">
+                        <img src="/images/event_1/page02_section03/arrow_right.png" alt="">
+                    </th:block>
+                </div>
+            </form>
+        </div>
+
+    </section>
+
+</section>
+
+
+<!--하단gnb영역-->
+
+<section id="bottomgnb">
+
+    <div class="box">
+        <div class="background"><img src="/images/event_1/page01_bottomgnb/box.png" alt=""></div>
+        <div class="iconbox">
+            <div class="icon01"><img src="/images/event_1/page01_bottomgnb/icon01.png" alt=""></div>
+            <div class="icon02"><img src="/images/event_1/page01_bottomgnb/icon02.png" alt=""></div>
+            <div class="icon03"><img src="/images/event_1/page01_bottomgnb/icon03.png" alt=""></div>
+            <div class="icon04"><img src="/images/event_1/page01_bottomgnb/icon04.png" alt=""></div>
+        </div>
+
+        <div class="linebar"><img src="/images/event_1/page01_bottomgnb/line.png" alt=""></div>
+
+    </div>
+
+    <div class="home"><img src="/images/event_1/page01_bottomgnb/icon05.png" alt=""></div>
+
+</section>
+
+
+<script src="/js/event_1/plugin/gsap.js"></script>
+<script src="/js/event_1/plugin/scrollTrigger.js"></script>
+<script src="/js/event_1/setting.js"></script>
+<!--<script src="js/scrollbar.js"></script>-->
+
+<script src="/js/event_1/page02.js"></script>
+
+<script src="/js/event_1/plugin/swiper.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/8.3.1/swiper-bundle.min.js"></script>
+
+<script type="text/javascript">
+    $(document).ready(function(){
+
+        $(window).scroll(function(){
+            var bottom_menu = $("#bottom_menu").offset().top;
+            //console.log(bottom_menu);
+            var docScrollY = $(document).scrollTop();
+            var barThis = $("#bottom_menu")
+            if( docScrollY >= 400 ) {
+                barThis.addClass("top_bar_fix");
+            }else{
+                barThis.removeClass("top_bar_fix");
+            }
+        });
+    });
+
+    function refreshRestProd(){
+        let params = $('#frm4').serialize();
+        $.ajax({
+            url :"/experienceForm.do",
+            data : params,
+            datatype : 'text',
+            type : "GET",
+            success : function(result){
+                let html = jQuery('<div>').html(result);
+                let contents = html.find("div#restProdTable").html();
+                $('#restProdTable').html(contents);
+            }
+        });
+    }
+</script>
+
+</body>
+</html>

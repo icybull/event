@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dongwonmall.event.experience.domain">
+    <select id="selAllEvent" parameterType="int" resultType="event">
+        /* EventMapper.selAllEvent */
+        SELECT A.EVENT_SEQ   AS event_Seq,
+               A.IMG_NM      AS img_Nm,
+               A.TITLE       AS title,
+               TO_CHAR(TO_DATE(A.START_DATE, 'YYYYMMDD'), 'YYYY.MM.DD') AS start_Date,
+               TO_CHAR(TO_DATE(A.END_DATE, 'YYYYMMDD'), 'YYYY.MM.DD') AS end_Date,
+               TO_CHAR(TO_DATE(A.START_DATE, 'YYYYMMDD'), 'DY') AS start_Dy,
+               TO_CHAR(TO_DATE(A.END_DATE, 'YYYYMMDD'), 'DY') AS end_Dy,
+               CASE WHEN END_DATE <![CDATA[<]]> TO_CHAR(SYSDATE, 'YYYYMMDD') THEN 'N'
+                    ELSE TO_CHAR(TO_DATE(A.END_DATE,'YYYYMMDD') - TRUNC(SYSDATE))
+                   END AS eventIng
+        FROM (
+            SELECT *
+            FROM EVENTEXP
+            ORDER BY START_DATE DESC
+             ) A
+        WHERE ROWNUM <![CDATA[<=]]> #{e_Cnt}
+    </select>
+
+    <select id="selEvent" parameterType="product" resultType="event">
+        /* EventMapper.selEvent */
+        SELECT EVENT_SEQ   AS event_Seq,
+               IMG_NM      AS img_Nm,
+               TITLE       AS title,
+               TO_CHAR(TO_DATE(START_DATE, 'YYYYMMDD'), 'YYYY.MM.DD') AS start_Date,
+               TO_CHAR(TO_DATE(END_DATE, 'YYYYMMDD'), 'YYYY.MM.DD') AS end_Date,
+               TO_CHAR(TO_DATE(START_DATE, 'YYYYMMDD'), 'DY') AS start_Dy,
+               TO_CHAR(TO_DATE(END_DATE, 'YYYYMMDD'), 'DY') AS end_Dy,
+               CASE WHEN END_DATE <![CDATA[<]]> TO_CHAR(SYSDATE, 'YYYYMMDD') THEN 'N'
+                    ELSE TO_CHAR(TO_DATE(END_DATE,'YYYYMMDD') - TRUNC(SYSDATE))
+                END AS eventIng
+        FROM EVENTEXP
+        WHERE EVENT_SEQ = #{event_Seq}
+    </select>
+
+    <select id="selEventCnt" resultType="int">
+        /* EventMapper.selEventCnt */
+        SELECT COUNT(*)
+        FROM EVENTEXP
+    </select>
+
+    <select id="selRelProduct" parameterType="product" resultType="product">
+        /* EventMapper.selRelProduct */
+        SELECT PRODUCTID   AS productId,
+               IMG_NM      AS img_Nm,
+               PRODUCT_NM  AS product_Nm,
+               TO_CHAR(PRICE, '999,999,999') AS PRICE
+        FROM EVENTEXPDOC
+        WHERE EVENT_SEQ = #{event_Seq}
+    </select>
+
+    <select id="getMainProdLis" parameterType="product" resultType="product">
+        /* EventMapper.getMainProdLis */
+        SELECT PRODUCTID   AS productId,
+               IMG_NM      AS img_Nm,
+               PRODUCT_NM  AS product_Nm,
+               TO_CHAR(PRICE, '999,999,999') AS PRICE
+        FROM EVENTEXPDOC
+        WHERE EVENT_SEQ IN #{event_Seq}
+    </select>
+
+    <select id="getEndProdLis" parameterType="product" resultType="product">
+        /* EventMapper.getEndProdLis */
+        SELECT PRODUCTID   AS productId,
+               IMG_NM      AS img_Nm,
+               PRODUCT_NM  AS product_Nm,
+               REVIEW_STAR  AS review_Star,
+               TO_CHAR(PRICE, '999,999,999') AS PRICE
+        FROM EVENTEXPDOC
+        WHERE EVENT_SEQ = #{event_Seq}
+    </select>
+    <select id="getRestProdLis" parameterType="product" resultType="product">
+        /* EventMapper.getRestProdLis */
+        SELECT B.PRODUCTID   AS productId,
+               B.IMG_NM      AS img_Nm,
+               B.PRODUCT_NM  AS product_Nm,
+               B.REVIEW_STAR AS review_Star,
+               TO_CHAR(B.PRICE, '999,999,999') AS PRICE,
+               B.PROD_SEQ    AS prod_Seq
+        FROM (
+            SELECT ROWNUM AS PROD_SEQ,
+                   A.*
+            FROM (
+                SELECT *
+                FROM EVENTEXPDOC
+                WHERE EVENT_SEQ = #{event_Seq}
+                ORDER BY IMG_NM
+                 ) A
+             ) B
+        WHERE B.PROD_SEQ BETWEEN #{refreshNum} * 4 - 3 AND #{refreshNum} * 4
+    </select>
+</mapper>

@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>체험단 이벤트_동원참치 튜나페</title>
+    <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.4/dist/web/variable/pretendardvariable.css" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@48,200,1,0" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,300,0,0" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@48,200,0,0" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/8.3.1/swiper-bundle.css"/>
+    <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="stylesheet" href="/css/event_2/common.css">
+    <link rel="stylesheet" href="/css/event_2/main.css">
+    <link rel="stylesheet" href="/css/event_2/second.css">
+    <link rel="stylesheet" href="/css/event_2/footer.css">
+    <link rel="stylesheet" href="/css/event_2/px-to-vw.css">
+    <script src="/js/experience.js"></script>
+
+</head>
+<body>
+<div id="wrap">
+    <header id="header">
+        <section class="header-top inner">
+            <a href="/event/main.do?E_CNT=6&version=2" class="arrow-back">이전 페이지</a>
+            <h1 class="page-title">체험단 이벤트</h1>
+            <ul class="header-utils">
+                <li><a href="#" class="search">검색</a></li>
+                <li><a href="#" class="cart">장바구니</a><span class="cart-num">2</span></li>
+            </ul>
+        </section>
+    </header>
+    <main style="padding-top:50px;">
+        <div class="event-title-box">
+            <div>
+                <h2 class="event-title">[체험단] [[${event.title}]] 체험단 모집</h2>
+                <p class="event-period" th:text="${event.start_Date} + ' ~ ' + ${event.end_Date}"></p>
+            </div>
+            <a href="#" class="share-btn"><span class="material-symbols-outlined">share</span></a>
+        </div>
+        <div class="period-box inner">
+            <ul>
+                <li>
+                    <span class="period-text">응모기간</span>
+                    <span  class="period-date" th:text="${event.start_Date} + ' ~ ' + ${event.end_Date}"></span>
+                </li>
+                <li>
+                    <span class="period-text">당첨발표</span>
+                    <span class="period-date">2022.08.08</span>
+                </li>
+                <li>
+                    <span class="period-text">리뷰작성기간</span>
+                    <span class="period-date">~2022.08.21</span>
+                </li>
+            </ul>
+            <p>*자세한 응모방법 및 리뷰 작성 안내사항은 하단을 참고하세요.</p>
+        </div>
+        <section class="join-banner">
+            <img src="/images/event_2/join-banner-01.jpg" alt="체험단 이벤트 20명 모집, 체험상품 동원참치 튜나페 고소마요 3개, 매콤마요 3개">
+        </section>
+
+        <section class="product-banner">
+            <div id="page-tab">
+                <ul>
+                    <li class="active"><a href="#main-banner">상세페이지</a></li>
+                    <li><a href="#review-notice">세부안내사항</a></li>
+                    <li><a href="#join">응모게시판</a></li>
+                </ul>
+            </div>
+            <div id="main-banner" style="background-color:#999999; padding:400px 0"></div>
+        </section>
+
+        <div id="review-notice" class="review-write">
+            <h3>체험 리뷰 작성 안내</h3>
+            <div class="review-step"><img src="/images/event_2/review-step.jpg" alt=""></div>
+            <div class="review-example">
+                <div class="bg-grey"></div>
+                <div class="ex01">
+                    <h5>SNS / 블로그 리뷰 작성 문구 및 해시태그 TIP</h5>
+                    <button type="button" id="data-copy1" class="data-copy1">위 상품을 소개하면서 동원몰로부터 <br> 상품을 무료로 제공받았습니다.  </button>
+                    <input type="hidden" id="data-area1" class="data-area1" value="위 상품을 소개하면서 동원몰로부터 상품을 무료로 제공받았습니다.">
+                    <button type="button" id="data-copy2" class="data-copy2">동원몰로부터 상품을 무료로 협찬받아 <br>작성한 리뷰입니다.  </button>
+                    <input type="hidden" id="data-area2" class="data-area2" value="동원몰로부터 상품을 무료로 협찬받아 작성한 리뷰입니다.">
+                    <button type="button" id="data-copy3" class="data-copy3">동원몰로부터 무료로 상품을 제공받았지만,<br>솔직하게 작성한 포스팅입니다.  </button>
+                    <input type="hidden" id="data-area3" class="data-area3" value="동원몰로부터 무료로 상품을 제공받았지만, 솔직하게 작성한 포스팅입니다.">
+                </div>
+                <div class="ex02">
+                    <p class="ex02-good">아래와 같이 <span class="bold">명확한 문구 사용</span> 좋아요!</p>
+                    <button type="button" id="data-copy4" class="data-copy4">#협찬 #광고 #무료협찬 </button>
+                    <input type="hidden" id="data-area4" class="data-area4" value="#협찬 #광고 #무료협찬">
+                    <p class="ex02-bad">아래와 같이 불명확한 문구는 사용 불가!</p>
+                    <span>#AD #Thanks_to #PR #컬래버레이션 <br>
+                            #파트너십 #앰버서더 #Sponsor</span>
+                    <p class="warning">(관계 법령 개정에 따라 법적 처벌 사유가 될 수 있습니다.)</p>
+                </div>
+            </div>
+        </div>
+        <section class="accordian" role="tablist" aria-live="polite">
+            <article>
+                    <span id="tab0" tabindex="0" class="section-title" aria-controls="panel0" role="tab">
+                        <h3>리뷰 작성 안내 세부사항</h3>
+                        <span class="material-symbols-outlined arrow-up">
+                            keyboard_arrow_up
+                            </span>
+                    </span>
+                <div class="collapsing-section" id="panel0" aria-labelledby="tab0" role="tabpanel" style="display:none;">
+                    <img src="/images/event_2/review-write-detail.jpg" alt="">
+                </div>
+            </article>
+            <article>
+                    <span id="tab1" tabindex="0" class="section-title open" aria-controls="panel1" role="tab">
+                        <h3>응모방법 안내</h3>
+                        <span class="material-symbols-outlined arrow-up">
+                            keyboard_arrow_up
+                            </span>
+                    </span>
+                <div class="collapsing-section" id="panel1" aria-labelledby="tab1" role="tabpanel" style="display:block">
+                    <img src="/images/event_2/event-howto.jpg" alt="">
+                    <span class="layer-line"></span>
+                </div>
+            </article>
+        </section>
+
+        <div class="event-rel-items">
+            <h4 class="inner">체험단 연관 상품</h4>
+            <div class="swiper">
+                <div class="swiper-wrapper" style="margin-left:14px;">
+                    <th:block  th:each="prod : ${prodList}">
+                        <div class="event-rel-item swiper-slide">
+                            <div class="rel-img-box">
+                                <a th:href="'https://m.dongwonmall.com/product/detail.do?productId=' + ${prod.productId}" class="rel-item-img"><img th:src="'https://img.dongwonmall.com/dwmall/static_root/model_img/main/' + ${prod.img_Nm} + '.jpg'" alt="동원참치 튜나페 고소마요 3개입"></a>
+                                <button class="cart-add-btn"><span class="hidden">장바구니에 추가</span></button>
+                            </div>
+                            <a href="#" class="ing-item-name" th:text="${prod.product_Nm}"></a>
+                            <strong class="ing-item-price">[[${prod.price}]]<span>원</span></strong>
+                        </div>
+                    </th:block>
+                </div>
+            </div>
+            <span class="layer-line" style="margin-top:1em;"></span>
+        </div>
+
+        <section class="reward-banner inner">
+            <ul>
+                <!-- 이미지 바꿀 예정 -->
+                <li><img src="/images/event_2/reward-banner.jpg" alt=""></li>
+                <li><img src="/images/event_2/reward-banner.jpg" alt=""></li>
+            </ul>
+        </section>
+
+        <section id="join" class="join-board">
+
+
+            <!-- 팝업 -->
+            <form id="frm3" action="" method="post">
+                <div class="popup-wrap" id="popup">
+                    <div class="popup">
+                        <div class="popup-head">
+                            <span class="head-title">체험단 응모를 위해<br><span class="blue-bold">사용자 등록</span>을 먼저 해주세요!</span>
+                        </div>
+                        <div class="popup-body inner">
+                            <div class="body-content">
+                                <label for="name">이름</label>
+                                <input type="text" id="name" name="name" placeholder="ex) 김동원" >
+                                <label for="phone_No">휴대폰 번호</label>
+                                <input type="text" id="phone_No" name="phone_No" placeholder="ex) 010-1234-5678">
+                            </div>
+                        </div>
+                        <div class="popup-footer">
+                            <span class="popup-btn confirm" onclick="regUser()"><span class="material-symbols-rounded">how_to_reg</span>등록하기</span>
+                            <span class="popup-btn modalclose" onclick="modalClose()">닫기<span class="material-symbols-rounded">close</span></span>
+                        </div>
+                    </div>
+                </div>
+            </form>
+
+            <div class="inner">
+                <h3>체험단 응모 게시판</h3>
+                <th:block th:if="${event.eventIng == 'N'}">
+                    <!-- 응모 마감 -->
+                    <span class="join-over"><span class="material-symbols-rounded">timer</span>응모 마감</span>
+                </th:block>
+                <th:block th:unless="${event.eventIng == 'N'}">
+                    <!--  로그인 정보 유무 확인  -->
+                    <th:block th:if="${session.user_Seq} == null">
+                        <!-- 체험단 리뷰 참여하기 -->
+                        <a onclick="popUp()" class="join-btn"><span class="material-symbols-rounded">how_to_vote</span>응모 참여하기</a>
+                    </th:block>
+                    <th:block th:unless="${session.user_Seq} == null">
+                        <!--   기존 사용자   -->
+                        <th:block th:if="${session.isReg == 'T'}">
+                            <!-- 응모 완료 -->
+                            <span class="join-complete"><span class="material-symbols-rounded">check_circle</span>응모 완료</span>
+                        </th:block>
+
+                        <!--   신규 사용자   -->
+                        <th:block th:unless="${session.isReg == 'T'}">
+                            <form id="frm" method="post" action="">
+                                <input type="hidden" id="event_Seq" name="event_Seq" th:value="${event.event_Seq}"/>
+                                <input type="hidden" id="user_Seq" name="user_Seq" th:value="${session.user_Seq}"/>
+                                <!-- 체험단 참여하기 팝업 후 댓글 입력 input -->
+                                <div class="reply-reg">
+                                    <label for="content">댓글 입력하기</label>
+                                    <div class="text-wrap">
+                                        <textarea id="content" name="content" type="text" onkeyup="lenthCheck()" placeholder="체험하고 싶은 이유와 개인 SNS 또는 블로그 주소를 반드시 작성해주세요."></textarea>
+                                        <span class="write-cnt" id="textLengthCheck">0 / 500자</span>
+                                    </div>
+                                    <div class="cf"><a onclick="contentReg()" class="reg-btn fr">등록</a></div>
+                                </div>
+                            </form>
+                        </th:block>
+                    </th:block>
+                </th:block>
+            </div>
+            <div class="reply-top inner">
+                <p>댓글 <span>총 <span class="reply-num">[[${totalCnt}]]</span>개</span></p>
+                <div class="toggle-box">
+                    <span>내 댓글 보기</span>
+                    <div class="toggle-button-cover">
+                        <div class="button-cover">
+                            <div class="button r" id="button-1">
+                                <th:block th:unless="${event.eventIng == 'N'}">
+                                    <th:block th:if="${session.user_Seq == null}">
+                                        <input type="checkbox" class="checkbox" onclick="popUp()"/>
+                                    </th:block>
+                                    <th:block th:unless="${session.user_Seq == null}">
+                                        <input type="checkbox" class="checkbox" onclick="myContent()"/>
+                                    </th:block>
+                                </th:block>
+                                <div class="knobs"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div id="contentTable">
+                <form id="frm2" method="get" action="">
+                    <div class="reply-container" th:each="content : ${contentList}">
+                        <!-- 내 댓글 삭제 하기 가장 첫번째거에 있음 -->
+                        <div class="reply-box">
+                            <div class="reply-info">
+                        <span class="reply-name">[[${content.name}]]
+                            <th:block th:unless="${event.eventIng == 'N'}">
+                                <th:block th:unless="${session.user_Seq} == null">
+                                    <span class="reply-mine" th:if="${session.user_Seq == content.user_Seq}">MY</span>
+                                </th:block>
+                            </th:block>
+                        </span>
+                                <span class="reply-date" th:text="${content.reg_Datetime}"></span>
+                                <th:block th:unless="${event.eventIng == 'N'}">
+                                    <th:block th:unless="${session.user_Seq} == null">
+                                        <span class="reply-delete material-symbols-outlined" th:if="${session.user_Seq == content.user_Seq}" th:onclick="|javascript:delContent('${session.user_Seq}')|">delete</span>
+                                    </th:block>
+                                </th:block>
+                            </div>
+                            <div class="reply-main cf">
+                                <p class="reply-text fl" th:text="${content.content}"></p>
+                                <span class="fr material-symbols-outlined">expand_more</span>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <input type="hidden" name="event_Seq" th:value="${event.event_Seq}"/>
+                    <input type="hidden"  id="page" name="page" value=""/>
+                    <input type="hidden" id="myContent" name="myContent" th:value="${myContent}"/>
+                    <div class="pager-box" th:with="startPage=${page-(page%5)}">
+                        <th:block th:if="${page == 0}">
+                            <a class="prev"><span class="material-symbols-rounded">chevron_left</span></a>
+                        </th:block>
+                        <th:block th:unless="${page == 0}">
+                            <a class="prev"><span class="material-symbols-rounded" th:onclick="|javascript:pageLoad('${page-1}')|">chevron_left</span></a>
+                        </th:block>
+                        <th:block th:each="i : ${#numbers.sequence(0,4)}">
+                            <th:block th:if="${i+startPage < totalPage}">
+                                <th:block th:if="${page == i+startPage}">
+                                    <a class="page-on" th:onclick="|javascript:pageLoad('${i+startPage}')|">[[${i+startPage+1}]]</a>
+                                </th:block>
+                                <th:block th:unless="${page == i+startPage}">
+                                    <a th:text="${i+startPage+1}" th:onclick="|javascript:pageLoad('${i+startPage}')|"></a>
+                                </th:block>
+                            </th:block>
+                        </th:block>
+                        <th:block th:if="${page+1<totalPage}">
+                            <a class="next"><span class="material-symbols-rounded" th:onclick="|javascript:pageLoad('${page+1}')|">chevron_right</span></a>
+                        </th:block>
+                        <th:block th:unless="${page+1<totalPage}">
+                            <a class="next"><span class="material-symbols-rounded">chevron_right</span></a>
+                        </th:block>
+                    </div>
+                </form>
+            </div>
+        </section>
+    </main>
+    <!-- //main -->
+
+
+    <footer class="inner">
+        <ul class="footer-nav-01">
+            <li><a href="#">이용약관</a></li>
+            <li><a href="#" class="personal">개인정보처리방침</a></li>
+            <li><a href="#">오류신고</a></li>
+            <li><a href="#">고객센터</a></li>
+            <li><a href="#">대량견적문의</a></li>
+            <li><a href="#">명품<br>김치상풍권 등록</a></li>
+        </ul>
+        <div class="family-site">
+            <input type="checkbox" id="click" name="family-site">
+            <label for="click">동원디어푸드</label>
+            <div class="site-links">
+                <ul>
+                    <li><a href="#">동원F&B</a></li>
+                    <li><a href="#">동원엔터프라이즈</a></li>
+                    <li><a href="#">동원산업</a></li>
+                    <li><a href="#">동원홈푸드</a></li>
+                    <li><a href="#">더반찬</a></li>
+                </ul>
+            </div>
+        </div>
+        <p class="footer-row-01">
+            동원디어푸드 대표이사 : 강용수 <br>
+            개인정보 보호책임자: 김하룡 / 청소년보호 책임자: 김하룡 <br>
+            사업자 등록번호: 703-88-01843
+            <a class="info-confirm" href="#">사업자 정보확인</a> <br>
+            통신 판매업 신고: 제 2021-서울서초-1572호 <br>
+            건강기능식품 판매업 신고: 제 2021-0098773호<br>
+        </p>
+        <p class="footer-row-02">
+            호스팅 사업자: (주)동원엔터프라이즈<br>
+            소비자 피해 방지 서비스 : ㈜동원디어푸드 에스크로
+        </p>
+        <address class="footer-row-03">
+            주소 : 서울시 서초구 마방로 68 동원산업빌딩
+        </address>
+        <p class="footer-row-04">
+            팩스 : 02-589-3217 / 이메일 : dwmall@dongwon.com<br>
+            고객만족센터 :<a href="#">1588-3745</a> &nbsp; 평일(09:00 - 18:00)
+        </p>
+        <p class="footer-row-04">
+            동원몰 내 일부 상품은 개별 판매자의 상품이 포함되어 있으며, 이경우 동원 디어푸드는
+            통신판매의 당사자가 아니므로 해당 상품 거래 정보 및 거래에 대해서는 개별 판매자에
+            책임이 있습니다.
+        </p>
+        <p class="footer-row-05">
+            Copyright 2021 Dongwon Dear Food Co.Ltd. <br> All Rights Reserved.
+        </p>
+        <a id="back-to-top" href="#header" class="top"><span class="hidden">탑버튼</span><span class="topbtn material-symbols-rounded">arrow_upward</span></a>
+    </footer>
+    <aside class="bottom-tab">
+        <section class="bottom-menu nav-down">
+            <a class="category" href="#"><span class="hidden">카테고리</span></a>
+            <a class="foryou" href="#"><span class="hidden">For You</span></a>
+            <a class="home" href="#"><span class="hidden">홈</span></a>
+            <a class="mydw" href="#"><span class="hidden">My 동원몰</span></a>
+            <a class="recent" href="#"><span class="hidden">최근 목 목록</span></a>
+        </section>
+    </aside>
+</div>
+<script src='https://code.jquery.com/jquery-3.6.0.min.js'></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/8.3.1/swiper-bundle.min.js"></script>
+<script src="/js/event_2/swiper2.js"></script>
+<!-- second.js 추가 -->
+<script src="/js/event_2/second.js"></script>
+<script src="/js/event_2/copy.js"></script>
+<script type="text/javascript">
+    $(document).on('click', '.reply-box', function(e){
+        e.preventDefault();
+
+        if($(this).hasClass("show-all") === true){     $(this).removeClass('show-all');  }
+        else { $(this).addClass('show-all'); }
+
+    })
+</script>
+</body>
+</html>

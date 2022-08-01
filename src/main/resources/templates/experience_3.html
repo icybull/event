@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>튜나페 체험단 이벤트 상세</title>
+    <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.4/dist/web/static/pretendard.css" />
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"/>
+    <link rel="stylesheet" href="/css/event_3/list_common.css">
+    <link rel="stylesheet" href="/css/event_3/detail_detail.css">
+    <script src='https://code.jquery.com/jquery-3.6.0.min.js'></script>
+    <script src="/js/experience.js"></script>
+</head>
+
+<body>
+<div id="wrap">
+    <header class="header">
+        <div class="header_1">
+            <a class="dwmall_logo" href="#"><p class="dwmall_logo_type">DWmall.</p></a>
+            <a href="#"><span class="material-symbols-outlined logo_dropdown_icon">expand_circle_down</span></a>
+            <ul class="header-utility">
+                <li>
+                    <a href="#" class="search"><span class="material-symbols-outlined search-icon">search</span></a>
+                </li>
+                <li>
+                    <a href="#" class="cart"><span class="material-symbols-outlined cart-icon">shopping_cart</span></a>
+                    <span class="cart-num">3</span>
+                </li>
+            </ul>
+        </div>
+        <div class="header_2">
+            <a href="/event/main.do?E_CNT=6&version=3" class="arrow-back"><span class="material-symbols-outlined arrow-back-icon">chevron_left</span></a>
+            <h1 class="page-title">이벤트 상세</h1>
+            <a href="#" class="like"><span class="material-symbols-outlined like-icon">favorite</span></a>
+            <a href="#" class="share"><span class="material-symbols-outlined share-icon"></span></a>
+        </div>
+    </header>
+
+    <main>
+        <div class="event-detail-title">
+            <span class="date-count" th:text="'D-' + ${event.eventIng}"></span>
+            <h3 class="event-title">[[${event.title}]] 체험단 모집</h3>
+        </div>
+        <div class="event-short-info">
+            <img class="event-short-info-img" src="#" alt="이벤트 개요 이미지">
+        </div>
+
+        <div class="event-main-templet">
+            <img src="main-templet-img" alt="이벤트 메인 템플릿 이미지">
+        </div>
+
+        <div class="event-info event-info-1">
+            <a class="how-to-vote" href="#">
+                <span class="how-to-vote-title">체험단 응모 방법</span>
+                <span class="material-symbols-outlined event-info-drop-icon">expand_less</span>
+            </a>
+            <img class="how-to-vote-img" src="#" alt="체험단 응모 방법 이미지">
+        </div>
+
+        <div class="event-info event-info-2">
+            <a class="review-method" href="#">
+                <span class="review-method-title">체험 리뷰 작성 안내</span>
+                <span class="material-symbols-outlined event-info-drop-icon">expand_less</span>
+            </a>
+            <img class="review-method-img" src="#" alt="체험 리뷰 작성 안내 이미지">
+        </div>
+
+        <div class="event-info event-info-3">
+            <a class="vote-notice" href="#">
+                <span class="vote-notice-title">응모 시 유의사항 안내</span>
+                <span class="material-symbols-outlined event-info-drop-icon">expand_less</span>
+            </a>
+            <img class="vote-notice-img" src="#" alt="응모 시 유의사항 안내 이미지">
+        </div>
+
+        <div class="related-item">
+            <h2 class="related-item-title">관련상품</h2>
+            <ul>
+                <li class="rel-item-1-area">
+                    <a class="rel-item-1" href="#">
+                        <img class="rel-item-img-1" src="/220726_dwmall_2p/images/gosomayo_big.jpg" alt="고소마요">
+                    </a>
+                    <p class="rel-item-name-1 fl">동원참치 튜나페<br>고소마요 x3개</p>
+                    <strong class="rel-item-price-1 fl">
+                        9,900
+                        <span>원</span>
+                    </strong>
+                    <a class="rel-item-cart" href="#">
+                            <span class="material-symbols-outlined cart-cir-icon-1">
+                                shopping_cart
+                            </span>
+                    </a>
+                </li>
+                <li class="rel-item-2-area">
+                    <a class="rel-item-2" href="#">
+                        <img class="rel-item-img-2" src="/220726_dwmall_2p/images/maecommayo_big.jpg" alt="매콤마요">
+                    </a>
+                    <p class="rel-item-name-2 fl">동원참치 튜나페<br>매콤마요 x3개</p>
+                    <strong class="rel-item-price-2 fl">
+                        9,900
+                        <span>원</span>
+                    </strong>
+                    <a class="rel-item-cart" href="#"><span class="material-symbols-outlined cart-cir-icon-2">shopping_cart</span></a>
+                </li>
+                <li class="rel-item-1-area">
+                    <a class="rel-item-1" href="#">
+                        <img class="rel-item-img-1" src="/220726_dwmall_2p/images/gosomayo_big.jpg" alt="고소마요">
+                    </a>
+                    <p class="rel-item-name-1 fl">동원참치 튜나페<br>고소마요 x3개</p>
+                    <strong class="rel-item-price-1 fl">
+                        9,900
+                        <span>원</span>
+                    </strong>
+                    <a class="rel-item-cart" href="#">
+                            <span class="material-symbols-outlined cart-cir-icon-1">
+                                shopping_cart
+                            </span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <form id="frm3" action="" method="post">
+            <div class="popup-wrap" id="popup">
+                <div class="popup">
+                    <div class="popup-close">
+                        <span class="popup-btn" onclick="modalClose()">
+                            <span class="material-symbols-outlined close-icon">
+                                close
+                            </span>
+                        </span>
+                    </div>
+                    <div class="popup-head">
+                        <span class="head-title">응모자 정보 입력</span>
+                    </div>
+                    <div class="popup-subtitle">
+                        <span class="sub-title">이름과 휴대폰 번호를 정확히 기재해주세요.</span>
+                    </div>
+                    <div class="popup-body">
+                        <div class="body-content">
+                            <label for="name">이름</label>
+                            <input type="text" id="name" name="name" placeholder="ex) 홍길동" >
+                            <label for="phone_No">휴대폰 번호 &nbsp;&nbsp;&nbsp;&nbsp;</label>
+                            <input type="text" id="phone_No" name="phone_No" placeholder="ex) 010-1234-5678">
+                        </div>
+                    </div>
+                    <div class="popup-footer">
+                        <span class="popup-btn confirm" onclick="regUser()">응모하기</span>
+                    </div>
+
+                </div>
+            </div>
+        </form>
+        <div class="review-rwrd-banner">
+            <img class="review-rwrd-img" src="/images/event_3/review_rwrd.jpg" alt="우수 리뷰 리워드 배너">
+        </div>
+        <th:block th:if="${event.eventIng == 'N'}">
+            <!-- 응모 마감 -->
+            <div class="vote-status-btn"><a class="vote-end-btn" href="#">응모 마감</a></div>
+            <h2 class="comment-title comment-input-area">댓글 (<span class="comment-count-num">[[${totalCnt}]]</span>)</h2>
+        </th:block>
+        <th:block th:unless="${event.eventIng == 'N'}">
+            <!--  로그인 정보 유무 확인  -->
+            <th:block th:if="${session.user_Seq} == null">
+                <!-- 체험단 리뷰 참여하기 -->
+                <div class="vote-status-btn">
+                    <a class="vote-btn" onclick="popUp()">응모하기</a>
+                </div>
+                <h2 class="comment-title comment-input-area">댓글 (<span class="comment-count-num">[[${totalCnt}]]</span>)</h2>
+            </th:block>
+            <th:block th:unless="${session.user_Seq} == null">
+                <!--   기존 사용자   -->
+                <th:block th:if="${session.isReg == 'T'}">
+                    <!-- 응모 완료 -->
+                    <div class="vote-status-btn">
+                        <a class="vote-complete-btn" href="#">
+                            <span>응모 완료</span>
+                            <span class="material-symbols-outlined check-icon">check_circle</span>
+                        </a>
+                    </div>
+                    <h2 class="comment-title comment-input-area">댓글 (<span class="comment-count-num">[[${totalCnt}]]</span>)</h2>
+                </th:block>
+                <!--   신규 사용자   -->
+                <th:block th:unless="${session.isReg == 'T'}">
+                    <form id="frm" method="post" action="">
+                        <input type="hidden" id="event_Seq" name="event_Seq" th:value="${event.event_Seq}"/>
+                        <input type="hidden" id="user_Seq" name="user_Seq" th:value="${session.user_Seq}"/>
+                        <!-- 체험단 참여하기 팝업 후 댓글 입력 input -->
+                        <div class="comment-input-area">
+                            <h2 class="comment-title">댓글 (<span class="comment-count-num">[[${totalCnt}]]</span>)</h2>
+                            <div class="comment-box-area">
+                                <textarea id="content" name="content" class="comment-box" onkeyup="lenthCheck()" placeholder="혐오•차별•비난 / 광고•홍보•상업적 / 사기•기만•현혹 / 부적절한 콘텐츠 / 불법적인 콘텐츠 / 기타 알맞지 않은 콘텐츠 게시 금지"></textarea>
+                            </div>
+                        </div>
+                        <div class="comment-put-area cf">
+                            <span class="comment-count fl" id="textLengthCheck">0 / 500자</span>
+                            <a class="comment-put-btn fr" onclick="contentReg()">등록</a>
+                        </div>
+                    </form>
+                </th:block>
+            </th:block>
+        </th:block>
+
+
+
+
+
+
+
+        <div class="see-my-cmt-area">
+            <div class="see-my-cmt-title">
+                <p class="see-my-cmt">내 댓글 보기</p>
+            </div>
+            <div class='see-my-cmt-btn'>
+                <input type="checkbox" id="toggle" hidden>
+                <label for="toggle" class="toggleSwitch">
+                    <span class="toggleButton"></span>
+                </label>
+            </div>
+        </div>
+
+        <div id="contentTable">
+            <form id="frm2" method="get" action="">
+                <th:block th:each="content : ${contentList}">
+                    <div class="comment-text-area">
+                    <span class="comment-top-text">
+                        <img class="member-level" th:src="'/images/event_3/' + ${content.grd_Nm} + '.png'" alt="회원등급">
+                        <span class="level-text" th:text="${content.level}"></span>
+                        <span class="user-name" th:text="${content.name}"></span>
+                        <th:block th:unless="${event.eventIng == 'N'}">
+                            <th:block th:unless="${session.user_Seq} == null">
+                                <span class="my-cmt-icon" th:if="${session.user_Seq == content.user_Seq}">내 댓글</span>
+                            </th:block>
+                        </th:block>
+                    </span>
+                        <p class="comment-text" th:text="${content.content}"></p>
+                        <span class="comment-bottom-text">
+                        <span class="comment-date" th:text="${content.reg_Datetime}"></span>
+                        <th:block th:unless="${event.eventIng == 'N'}">
+                            <th:block th:unless="${session.user_Seq} == null">
+                                <a class="edit-icon"><span class="material-symbols-outlined cmt-edit-icon" th:if="${session.user_Seq == content.user_Seq}">edit</span></a>
+                                <a class="edit-icon"><span class="material-symbols-outlined cmt-del-icon" th:if="${session.user_Seq == content.user_Seq}" th:onclick="|javascript:delContent('${session.user_Seq}')|">delete</span></a>
+                            </th:block>
+                        </th:block>
+                    </span>
+                    </div>
+                </th:block>
+
+
+                <input type="hidden" name="event_Seq" th:value="${event.event_Seq}"/>
+                <input type="hidden" id="page" name="page" value=""/>
+                <input type="hidden" id="myContent" name="myContent" th:value="${myContent}"/>
+
+                <div class="cmt-page-number-area" th:with="startPage=${page-(page%5)}">
+                    <th:block th:if="${page == 0}">
+                        <a class="material-symbols-outlined move-back-btn">chevron_left</a>
+                    </th:block>
+                    <th:block th:unless="${page == 0}">
+                        <a class="material-symbols-outlined move-next-btn" th:onclick="|javascript:pageLoad('${page-1}')|">chevron_left</a>
+                    </th:block>
+                    <div class="page-number">
+                        <th:block th:each="i : ${#numbers.sequence(0,4)}">
+                            <th:block th:if="${i+startPage < totalPage}">
+                                <th:block th:if="${page == i+startPage}">
+                                    <a class="num-active" th:onclick="|javascript:pageLoad('${i+startPage}')|">[[${i+startPage+1}]]</a>
+                                </th:block>
+                                <th:block th:unless="${page == i+startPage}">
+                                    <a class="num-normal" th:onclick="|javascript:pageLoad('${i+startPage}')|" th:text="${i+startPage+1}"></a>
+                                </th:block>
+                            </th:block>
+                        </th:block>
+                    </div>
+                    <th:block th:if="${page+1<totalPage}">
+                        <a class="material-symbols-outlined move-next-btn" th:onclick="|javascript:pageLoad('${page+1}')|">chevron_right</a>
+                    </th:block>
+                    <th:block th:unless="${page+1<totalPage}">
+                        <a class="material-symbols-outlined move-back-btn">chevron_right</a>
+                    </th:block>
+                </div>
+            </form>
+        </div>
+    </main>
+    <footer>
+        <div class="foo-img">
+            <img class="footer-img" src="/images/event_3/footer_2.png" alt="footer_image">
+        </div>
+    </footer>
+    <aside class="bottom-tab">
+        <section class="bottom-menu">
+            <a href="#"><img src="/images/event_3/menu_category_2.png" alt="카테고리"></a>
+            <a href="#"><img src="/images/event_3/menu_foryou_2.png" alt="Foryou"></a>
+            <a href="#"><img src="/images/event_3/menu_home_2.png" alt="홈"></a>
+            <a href="#"><img src="/images/event_3/menu_my_2.png" alt="마이페이지"></a>
+            <a href="#"><img src="/images/event_3/menu_view_2.png" alt="최근 본 상품"></a>
+        </section>
+    </aside>
+</div>
+</body>
+</html>

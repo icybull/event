@@ -1,0 +1,33 @@
+.main {
+    margin-left: auto;
+    margin-right: auto;
+    width: 900px;
+    height: 800px;
+    margin-top: 240px;
+}
+
+.event {
+    width: 400px;
+    height: 800px;
+}
+
+.main .event .event_content .event_a .event_b {
+    margin-top: 200px;
+    margin-left: 20px;
+}
+.main .event .event_content .event_a .event_b .event_btn {
+    border-radius: 20px;
+    justify-content: center;
+    width: 700px;
+    height: 200px;
+    margin-bottom: 55px;
+    font-size: 50px;
+}
+
+.f_size {
+    font-size: 20px;
+}
+*{
+    font-family: 'Gowun Dodum', sans-serif;
+}
+

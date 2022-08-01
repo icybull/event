@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>이벤트_동원몰</title>
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+          crossorigin="anonymous">
+    <script
+            src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+            crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+            integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+            crossorigin="anonymous"></script>
+
+    <script src="/js/event.js"></script>
+    <script th:inline="javascript">
+
+    </script>
+</head>
+<body>
+<form id="frm" action="" method="get">
+    <input type="hidden" id="E_CNT" name="E_CNT" value=""/>
+    <input type="hidden" id="version" name="version" th:value="${session.version}"/>
+</form>
+<div class="container" style="margin-left: 400px;" id="eventTable">
+    <h1>이벤트 체험단</h1>
+    <th:block th:each="event : ${eventList}">
+        <div class="mb-3">
+            <th:block th:if="${event.eventIng == 'N'}">
+                <div class="mb-2">
+                    <button class="btn btn-secondary" disabled="disabled">종료</button>
+                </div>
+                <br>
+            </th:block>
+            <th:block th:unless="${event.eventIng == 'N'}">
+                <div class="d-flex mb-2">
+                    <button class="btn btn-warning mr-4" disabled="disabled">응모중</button>
+                    <p th:text="'D-' + ${event.eventIng}"></p>
+                </div>
+            </th:block>
+
+            <th:block th:if="${event.event_Seq} == '000000401356'">
+                <a th:href="'/experienceForm.do?event_Seq=' + ${event.event_Seq} + '&page=0&myContent=0'"><img style="width: 540px; height: 500px;" th:src="'/images/event_2/' + ${event.img_Nm} + '.jpg'"/></a>
+            </th:block>
+            <th:block th:unless="${event.event_Seq} == '000000401356'">
+                <a th:href="'https://m.dongwonmall.com/event/experienceForm.do?E_SEQ='+ ${event.event_Seq} +'&E_GBN_CD=01&pageStatus=&EW_SEQ=&ER_SEQ=&EEM_SEQ='"><img style="width: 540px; height: 300px;" th:src="'/images/event_2/' + ${event.img_Nm} + '.png'"/></a>
+            </th:block>
+            <p th:text="${event.title}"></p>
+            <p th:text="${event.start_Date} + '(' + ${event.start_Dy} + ') ~ ' + ${event.end_Date} + '(' + ${event.end_Dy} + ')'"></p>
+        </div>
+        <hr>
+    </th:block>
+    <br>
+    <!-- 1. a 태그 사용해서 get방식으로 5개 그다음은 10개 그 다음은 15개 이렇게 불러오기 / 2. 다 불러오고 숨겼다가 보여주기 -->
+    <th:block th:if="${listSize < eventCnt}">
+        <a th:onclick="|javascript:eventLoad('${e_Cnt + 5}')|"><button class="btn mb-5" style="width: 600px;">더보기</button></a>
+    </th:block>
+</div>
+</body>
+</html>

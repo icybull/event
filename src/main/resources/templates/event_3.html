@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>동원몰 체험단 이벤트</title>
+    <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.4/dist/web/static/pretendard.css"/>
+    <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/8.3.1/swiper-bundle.css"/>
+
+    <link rel="stylesheet" href="/css/event_3/list_common.css">
+    <link rel="stylesheet" href="/css/event_3/list_detail.css">
+    <script src="/js/event.js"></script>
+</head>
+<body>
+<form id="frm" action="" method="get">
+    <input type="hidden" id="E_CNT" name="E_CNT" value=""/>
+    <input type="hidden" id="version" name="version" th:value="${session.version}"/>
+</form>
+<div id="wrap">
+    <header class="header">
+        <a href="/" class="arrow-back">
+            <img class="arrow-back-icon" src="/images/event_3/arrow_back.png" alt="이전 페이지">
+        </a>
+        <h1 class="page-title">혜택 PLUS</h1>
+        <ul class="header-utility">
+            <li>
+                <a href="#" class="search"><img class="search-icon" src="/images/event_3/search.png" alt="검색"></a>
+            </li>
+            <li>
+                <a href="#" class="cart"><img class="cart-icon" src="/images/event_3/cart.png" alt="장바구니"></a>
+                <span class="cart-num">1</span>
+            </li>
+        </ul>
+    </header>
+    <main>
+        <div class="event-tab inner">
+            <ul>
+                <li><a href="#">전체</a></li>
+                <li><a href="#">이벤트</a></li>
+                <li class="active"><a href="#">체험단</a></li>
+                <li><a href="#">카드혜택</a></li>
+            </ul>
+        </div>
+        <!--   진행중 메인 이벤트 체험단   -->
+        <div id="ing-content">
+            <div class="ing-title">
+                <h3 class="content-title">응모 중 체험단</h3>
+                <a href="#" class="ing-view-all">전체 보기 ></a>
+            </div>
+            <ul class="ing-event-img">
+                <th:block th:each="i : ${#numbers.sequence(0,2)}">
+                    <li class="ing-event-img1">
+                        <a th:href="'/experienceForm.do?event_Seq=' + ${mainEvent.event_Seq} + '&page=0&myContent=0'">
+                            <img th:src="'/images/event_3/' + ${mainEvent.img_Nm} + '.jpg'" alt="동원참치 튜나페 고소마요&매콤마요 체험단 모집">
+                        </a>
+                        <span class="date-count1" th:text="'D-' + ${mainEvent.eventIng}"></span>
+                    </li>
+                </th:block>
+            </ul>
+            <!--   메인 이벤트 체험단 관련 상품   -->
+            <div class="swiper ing-rel-items">
+                <!-- <span>+</span> -->
+                <ul class="swiper-wrapper ing-rel-box">
+                    <th:block th:each="mainProd : ${mainProdList}">
+                        <li class="swiper-slide ing-rel-item cf">
+                            <a th:href="'https://m.dongwonmall.com/product/detail.do?productId=' + ${mainProd.productId}" class="ing-item-img fl">
+                                <img class="rel-item-img" th:src="'https://img.dongwonmall.com/dwmall/static_root/model_img/main/' + ${mainProd.img_Nm} + '.jpg'" alt="동원참치 튜나페 고소마요 3개입">
+                            </a>
+                            <a th:href="'https://m.dongwonmall.com/product/detail.do?productId=' + ${mainProd.productId}" class="ing-item-name fl">동원참치 튜나페<br>고소마요 x3개</a>
+                            <strong class="ing-item-price fl" th:text="${mainProd.price} + '원'"></strong>
+                            <a href="#">
+                                <img class="cart-cir-icon" src="/images/event_3/cart_cir.png" alt="장바구니에 담기">
+                            </a>
+                        </li>
+                    </th:block>
+                </ul>
+            </div>
+        </div>
+        <!--   종료 이벤트 체험단   -->
+        <div id="eventTable">
+            <div id="end-content">
+                <div class="end-title">
+                    <h3 class="content-title">종료된 체험단</h3>
+                    <a href="#" class="end-view-all">전체 보기 ></a>
+                </div>
+                <th:block th:each="endEvent : ${endEventList}">
+                    <!-- 배너 이미지 수정 예정  -->
+                    <div class="end-event-card cf">
+                        <p class="status-icon">종료</p>
+                        <a th:href="'https://m.dongwonmall.com/event/experienceForm.do?E_SEQ='+ ${endEvent.event_Seq} +'&E_GBN_CD=01&pageStatus=&EW_SEQ=&ER_SEQ=&EEM_SEQ='">
+                            <img class="fl" th:src="'/images/event_3/'+ ${endEvent.img_Nm} + '.jpg'" alt="종료 이벤트 배너">
+                        </a>
+                        <h4 class="fl" th:text="${endEvent.title}"></h4>
+                        <p class="date fl" th:text="${endEvent.start_Date} + '(' + ${endEvent.start_Dy} + ')'"><br></p>
+                        <p class="date fl" th:text="'~ ' + ${endEvent.end_Date}+ '(' + ${endEvent.end_Dy} + ')'"></p>
+                        <a href="#" class="event-result fl">당첨 결과</a>
+                        <a href="#" class="event-review fl">리뷰 보기</a>
+                    </div>
+                </th:block>
+                <th:block th:if="${listSize < eventCnt}">
+                    <a class="more-btn" th:onclick="|javascript:eventLoad('${e_Cnt + 5}')|">
+                        <span class="more-btn-plus">+</span>
+                        <span class="three-more">5개 더보기</span>
+                    </a>
+                </th:block>
+            </div>
+        </div>
+        <!--   리뷰   -->
+        <div id="review-content">
+            <div class="review-title">
+                <h3 class="content-title">우수 리뷰</h3>
+                <a href="#" class="review-view-all">전체 보기 ></a>
+            </div>
+            <ul class="review-card cf">
+                <li>
+                    <p class="status-icon-top1">TOP 1</p>
+                    <a href="#" class="review-img1">
+                        <img src="https://img.dongwonmall.com/dwmall/static_root/event/105412/4a9f69f8-9b65-44e3-bb51-fd43e73e5f6e.jpg"
+                             alt="리뷰 이미지 1">
+                    </a>
+                    <p class="review-card-title">유유무무 체험단 당첨!</p>
+                    <p class="review-date">2022.06.06</p>
+                    <p class="review-id">gus***</p>
+                </li>
+                <li>
+                    <p class="status-icon-top2">TOP 2</p>
+                    <a href="#" class="review-img2">
+                        <img src="https://img.dongwonmall.com/dwmall/static_root/event/105410/19a46eb9-5570-4198-a19d-41c1705ff08d.jpg"
+                             alt="리뷰 이미지 2">
+                    </a>
+                    <p class="review-card-title">유유무무 체험단 당첨!</p>
+                    <p class="review-date">2022.06.06</p>
+                    <p class="review-id">gus***</p>
+                </li>
+            </ul>
+        </div>
+    </main>
+    <footer>
+        <div class="foo-img">
+            <img src="/images/event_3/footer_img.jpg" alt="footer_image">
+        </div>
+    </footer>
+    <aside class="bottom-tab">
+        <section class="bottom-menu">
+            <a href="#"><img src="/images/event_3/menu_category.png" alt="카테고리"></a>
+            <a href="#"><img src="/images/event_3/menu_foryou.png" alt="Foryou"></a>
+            <a href="#"><img src="/images/event_3/menu_home.png" alt="홈"></a>
+            <a href="#"><img src="/images/event_3/menu_my.png" alt="마아페이지"></a>
+            <a href="#"><img src="/images/event_3/menu_view.png" alt="최근 본 상품"></a>
+        </section>
+    </aside>
+</div>
+<script src='https://code.jquery.com/jquery-3.6.0.min.js'></script>
+<script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+<script src="/js/event_3/slider.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/8.3.1/swiper-bundle.min.js"></script>
+<script src="/js/event_3/swiper.js"></script>
+</body>
+</html>

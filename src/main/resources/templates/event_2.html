@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>체험단 이벤트_동원몰</title>
+    <link rel="stylesheet" as="style" crossorigin
+          href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.4/dist/web/variable/pretendardvariable.css"/>
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@48,200,1,0"/>
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,300,0,0"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/8.3.1/swiper-bundle.css"/>
+    <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="stylesheet" href="/css/event_2/common.css">
+    <link rel="stylesheet" href="/css/event_2/main.css">
+    <link rel="stylesheet" href="/css/event_2/footer.css">
+    <link rel="stylesheet" href="/css/event_2/px-to-vw.css">
+    <script src="/js/event.js"></script>
+</head>
+<body>
+<form id="frm" action="" method="get">
+    <input type="hidden" id="E_CNT" name="E_CNT" value=""/>
+    <input type="hidden" id="version" name="version" th:value="${session.version}"/>
+</form>
+
+<div id="wrap">
+    <header id="header">
+        <section class="header-top inner">
+            <a href="/" class="arrow-back">이전 페이지</a>
+            <h1 class="page-title">체험단 이벤트</h1>
+            <ul class="header-utils">
+                <li><a href="#" class="search">검색</a></li>
+                <li><a href="#" class="cart">장바구니</a><span class="cart-num">2</span></li>
+            </ul>
+        </section>
+    </header>
+    <main>
+        <div class="event-tab">
+            <ul>
+                <li class="active"><a href="#ing-content">응모중</a></li>
+                <li><a href="#end-content">종료된 체험단</a></li>
+                <li><a href="#review-content">체험단 리뷰</a></li>
+            </ul>
+        </div>
+        <!--   진행중 이벤트 체험단   -->
+        <div id="ing-content" class="section">
+            <a th:href="@{/experienceForm.do(event_Seq=${mainEvent.event_Seq}, page=0, myContent=0)}">
+                <div class="ing-event-img">
+                    <img th:src="'/images/event_2/' + ${mainEvent.img_Nm} + '.jpg'"
+                         alt="체험단 이벤트, 카나페와 동원참치의 만남! 튜나페 체험단 20명 모집, 2022년 6월 20일부터 2022년 7월 6일까지 응모, 클릭시 상세페이지로 이동">
+                    <th:block th:unless="${mainEvent.eventIng == 'N'}">
+                        <span class="date-count" th:text="'D-' + ${mainEvent.eventIng}"></span>
+                    </th:block>
+                </div>
+            </a>
+            <ul class="ing-menu">
+                <li class="person-num">
+                    <p>현재 응모자 수<span><span class="person-num-data" th:text="${totalCnt}"></span>명</span></p>
+                </li>
+                <li class="ing-link"><a href="#">응모하러 가기<span> ></span></a></li>
+                <li class="winner-link"><a href="#">당첨자 발표<span> ></span></a></li>
+            </ul>
+            <div class="ing-rel-items">
+                <h4 class="inner">응모중인 체험단 연관 상품</h4>
+                <ul class="ing-rel-box">
+                    <th:block th:each="mainProd : ${mainProdList}">
+                        <li class="ing-rel-item cf">
+                            <a th:href="'https://m.dongwonmall.com/product/detail.do?productId=' + ${mainProd.productId}" class="ing-item-img fl">
+                                <img th:src="'https://img.dongwonmall.com/dwmall/static_root/model_img/main/' + ${mainProd.img_Nm} + '.jpg'"
+                                     alt="진행중 이벤트 관련 상품명">
+                            </a>
+                            <a th:href="'https://m.dongwonmall.com/product/detail.do?productId=' + ${mainProd.productId}" class="ing-item-name fl" th:text="${mainProd.product_Nm}"></a>
+                            <div>
+                                <strong class="ing-item-price fl" th:text="${mainProd.price}"></strong><span class="fl">원</span>
+                            </div>
+                            <button class="cart-add-btn fr"><span class="hidden">장바구니에 추가</span></button>
+                        </li>
+                    </th:block>
+                </ul>
+            </div>
+        </div>
+
+        <!--   종료된 이벤트 체험단   -->
+        <div id="eventTable">
+            <div id="end-content" class="inner section">
+                <h3>종료된 체험단</h3>
+                <th:block th:each="endEvent : ${endEventList}">
+                    <div class="end-event-item">
+                        <a th:href="'https://m.dongwonmall.com/event/experienceForm.do?E_SEQ='+ ${endEvent.event_Seq} +'&E_GBN_CD=01&pageStatus=&EW_SEQ=&ER_SEQ=&EEM_SEQ='"><img th:src="'/images/event_2/'+ ${endEvent.img_Nm} + '.png'" alt="종료 체험단, 리챔 오리지널 체험단 30명 모집, 2022.06.02 - 2022.06.20"></a>
+                        <span class="end-label">종료</span>
+                    </div>
+                </th:block>
+            </div>
+            <th:block th:if="${listSize < eventCnt}">
+                <a class="more-btn inner section" th:onclick="|javascript:eventLoad('${e_Cnt + 5}')|">더보기</a>
+            </th:block>
+        </div>
+
+        <!--   체험단 리뷰   -->
+        <div id="review-content" class="section">
+            <h3 class="inner">체험단 리뷰</h3>
+            <div class="swiper">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide review-box" style="margin-left:14px;">
+                        <div class="id-img fl"><img src="/images/event_2/icons/id-img.png" alt="dkp***의 프로필"></div>
+                        <p class="review-id fl">dk***<span class="review-id-date">2022.07.06</span></p>
+                        <a href="#" class="review-img"><img src="https://img.dongwonmall.com/dwmall/static_root/event/105398/c05782e4-2119-4f2a-8c08-968e7cb84296.jpg" alt="딤섬 샤오롱바오 체험단 리뷰 사진"></a>
+                        <p class="review-title">집에서 동원 샤오롱바오 딤섬 먹어보기</p>
+                        <p class="review-text">육즙가득 동원 샤오롱바오 딤섬 너무너무 맛있어요! 둘이 먹다 하나가</p>
+                        <span class="product-name">#딤섬_샤오롱바오</span>
+                        <a class="fr" href="#">더보기 +</a>
+                    </div>
+                    <div class="swiper-slide review-box">
+                        <div class="id-img fl"><img src="/images/event_2/icons/id-img.png" alt="syn***의 프로필"></div>
+                        <p class="review-id fl">syn***<span class="review-id-date">2022.07.01</span></p>
+                        <a href="#" class="review-img"><img src="https://img.dongwonmall.com/dwmall/static_root/event/105405/4cd805aa-afe8-4e9c-92f0-565126f5e224.jpg" alt="유유무무제육볶음 리뷰 사진"></a>
+                        <p class="review-title">동원 유유무무제육볶음</p>
+                        <p class="review-text">한돈 돼지고기의 고소하고 담백한 맛과 양파, 마늘, 배 등을 넣어 건강하게 만든 양념장, 국내기술제조 고추장이 깊은 맛과 깔끔한 매콤달콤함이 제대로다.</p>
+                        <span class="product-name">#유유무무제육볶음</span>
+                        <a class="fr" href="#">더보기 +</a>
+                    </div>
+                    <div class="swiper-slide review-box">
+                        <div class="id-img fl"><img src="/images/event_2/icons/id-img.png" alt="kyo***의 프로필"></div>
+                        <p class="review-id fl">kyo***<span class="review-id-date">2022.06.11</span></p>
+                        <a href="#" class="review-img"><img src="https://img.dongwonmall.com/dwmall/static_root/event/105390/40c77ac9-3ca6-4c54-ac39-8b1a78cf0291.jpg" alt=""></a>
+                        <p class="review-title">아이들도 어른들도 취향저격~!</p>
+                        <p class="review-text">짜장칼떡볶이도 매콤달콤 국물떡볶이도
+                            간편한 조리법에 맛도 부족하지 않네요~
+                            상온보관이라 냉장고 자리 차지하지 않으니 좋고
+                            간편하게 먹을 수 있어서 더 좋아요
+                            어묵이 없는게 조금 아쉬워 바로 마트가서 사다 넣었답니다</p>
+                        <span class="product-name">#떡볶이의신_짜장떡볶이</span>
+                        <a class="fr" href="#">더보기 +</a>
+                    </div>
+                    <div class="swiper-slide review-box">
+                        <div class="id-img fl"><img src="/images/event_2/icons/id-img.png" alt="dw***의 프로필"></div>
+                        <p class="review-id fl">dw***<span class="review-id-date">2022.05.21</span></p>
+                        <a href="#" class="review-img"><img src="https://img.dongwonmall.com/dwmall/static_root/event/105371/9f18d6d8-db63-4134-8993-16f3571f1a01.jpeg" alt=""></a>
+                        <p class="review-title">우리 아이 장 건강을 책임지는 핑크퐁 키즈 프로바이오틱스!</p>
+                        <p class="review-text">아이가 좋아하는 새콤달콤 프로바이오틱스!</p>
+                        <span class="product-name">#핑크퐁_키즈_프로바이오틱스</span>
+                        <a class="fr" href="#">더보기 +</a>
+                    </div>
+                    <div class="swiper-slide review-box">
+                        <div class="id-img fl"><img src="/images/event_2/icons/id-img.png" alt="hh***의 프로필"></div>
+                        <p class="review-id fl">hh***<span class="review-id-date">2022.04.09</span></p>
+                        <a href="#" class="review-img"><img src="https://img.dongwonmall.com/dwmall/static_root/event/105355/c415cfd9-f305-4dbc-a29e-2ae95e30e754.jpg" alt=""></a>
+                        <p class="review-title">양반매실 강추!!</p>
+                        <p class="review-text">더운 여름이 다가 올수록
+                            생각나는 매실!
+                            속이 답답할때 매실청에
+                            물 섞어서 먹곤 했는데 국산매실과 국산사과를 사용한
+                            양반매실은 1병에 25kcal ??
+                            이렇게 달콤한데 25ckal리 라니..</p>
+                        <span class="product-name">#양반_매실</span>
+                        <a class="fr" href="#">더보기 +</a>
+                    </div>
+                </div>
+            </div>
+            <a href="#" class="review-more-btn inner">전체보기 + </a>
+        </div>
+
+        <!--   종료된 체험단 관련 상품들   -->
+        <div class="event-rel-items inner">
+            <h4>체험단 연관 상품</h4>
+            <ul class="event-rel-item-box">
+                <th:block th:each="endProd : ${endProdList}">
+                    <li class="event-rel-item">
+                        <div class="rel-img-box">
+                            <a th:href="'https://m.dongwonmall.com/product/detail.do?productId=' + ${endProd.productId}" class="rel-item-img"><img
+                                    th:src="'https://img.dongwonmall.com/dwmall/static_root/' + ${endProd.img_Nm}"
+                                    alt=""></a>
+                            <button class="cart-add-btn"><span class="hidden">장바구니에 추가</span></button>
+                        </div>
+                        <a th:href="'https://m.dongwonmall.com/product/detail.do?productId=' + ${endProd.productId}" class="ing-item-name" th:text="${endProd.product_Nm}"></a>
+                        <div class="ing-item-price">
+                            <strong th:text="${endProd.price}"></strong><span>원</span>
+                        </div>
+                        <div class="star-box cf">
+                            <th:block th:each="i : ${#numbers.sequence(1,endProd.review_Star)}">
+                                <span class="material-symbols-rounded star fl">star</span>
+                            </th:block>
+                            <p class="fl"><span class="bold" th:text="${endProd.review_Star} + '.0'"></span></p>
+                        </div>
+                    </li>
+                </th:block>
+            </ul>
+            <a href="#" class="rel-more-btn inner">더보기 + </a>
+        </div>
+    </main>
+
+    <!--   footer   -->
+    <footer class="inner">
+        <ul class="footer-nav-01">
+            <li><a href="#">이용약관</a></li>
+            <li><a href="#" class="personal">개인정보처리방침</a></li>
+            <li><a href="#">오류신고</a></li>
+            <li><a href="#">고객센터</a></li>
+            <li><a href="#">대량견적문의</a></li>
+            <li><a href="#">명품<br>김치상풍권 등록</a></li>
+        </ul>
+        <div class="family-site">
+            <input type="checkbox" id="click" name="family-site">
+            <label for="click">동원디어푸드</label>
+            <div class="site-links">
+                <ul>
+                    <li><a href="#">동원F&B</a></li>
+                    <li><a href="#">동원엔터프라이즈</a></li>
+                    <li><a href="#">동원산업</a></li>
+                    <li><a href="#">동원홈푸드</a></li>
+                    <li><a href="#">더반찬</a></li>
+                </ul>
+            </div>
+        </div>
+        <p class="footer-row-01">
+            동원디어푸드 대표이사 : 강용수 <br>
+            개인정보 보호책임자: 김하룡 / 청소년보호 책임자: 김하룡 <br>
+            사업자 등록번호: 703-88-01843
+            <a class="info-confirm" href="#">사업자 정보확인</a> <br>
+            통신 판매업 신고: 제 2021-서울서초-1572호 <br>
+            건강기능식품 판매업 신고: 제 2021-0098773호<br>
+        </p>
+        <p class="footer-row-02">
+            호스팅 사업자: (주)동원엔터프라이즈<br>
+            소비자 피해 방지 서비스 : ㈜동원디어푸드 에스크로
+        </p>
+        <address class="footer-row-03">
+            주소 : 서울시 서초구 마방로 68 동원산업빌딩
+        </address>
+        <p class="footer-row-04">
+            팩스 : 02-589-3217 / 이메일 : dwmall@dongwon.com<br>
+            고객만족센터 :<a href="#">1588-3745</a> &nbsp; 평일(09:00 - 18:00)
+        </p>
+        <p class="footer-row-04">
+            동원몰 내 일부 상품은 개별 판매자의 상품이 포함되어 있으며, 이 경우 동원 디어푸드는
+            통신판매의 당사자가 아니므로 해당 상품 거래 정보 및 거래에 대해서는 개별 판매자에
+            책임이 있습니다.
+        </p>
+        <p class="footer-row-05">
+            Copyright 2021 Dongwon Dear Food Co.Ltd. <br> All Rights Reserved.
+        </p>
+        <a id="back-to-top" href="#header" class="top"><span class="hidden">탑버튼</span><span class="topbtn material-symbols-rounded">arrow_upward</span></a>
+    </footer>
+    <aside class="bottom-tab">
+        <section class="bottom-menu nav-down">
+            <a class="category" href="#"><span class="hidden">카테고리</span></a>
+            <a class="foryou" href="#"><span class="hidden">For You</span></a>
+            <a class="home" href="#"><span class="hidden">홈</span></a>
+            <a class="mydw" href="#"><span class="hidden">My 동원몰</span></a>
+            <a class="recent" href="#"><span class="hidden">최근 목 목록</span></a>
+        </section>
+    </aside>
+</div>
+<script src='https://code.jquery.com/jquery-3.6.0.min.js'></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/8.3.1/swiper-bundle.min.js"></script>
+<script src="/js/event_2/swiper.js"></script>
+<script src="/js/event_2/main.js"></script>
+
+</body>
+</html>

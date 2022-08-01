@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>체험단이벤트</title>
+  <link rel="stylesheet" href="/css/event_1/plugin/reset.css">
+  <link rel="stylesheet" href="/css/event_1/plugin/common.css">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+
+
+
+
+  <link rel="stylesheet" href="/css/event_1/plugin/slick.css">
+  <link rel="stylesheet" href="/css/event_1/style.css">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/8.3.1/swiper-bundle.css"/>
+
+  <script src='https://code.jquery.com/jquery-3.6.0.min.js'></script>
+  <script src="/js/event_1/plugin/slick.min.js"></script>
+  <script src="/js/event_1/plugin/easing.js"></script>
+  <script src="/js/event.js"></script>
+
+  <script type="text/javascript">
+    function loadTime(){
+      let params = $('#frm').serialize();
+      $.ajax({
+        url :"/event/main.do",
+        data : params,
+        datatype : 'text',
+        type : "GET",
+        success : function(result){
+          let html = jQuery('<div>').html(result);
+          let contents = html.find("div#dateTable").html();
+          let slickEvent = html.find("div#slickEvent").html();
+          $('#slickEvent').html(slickEvent);
+          $('#dateTable').html(contents);
+        }
+      });
+    }
+  </script>
+
+</head>
+
+<body>
+<form id="frm" action="" method="get">
+  <input type="hidden" id="E_CNT" name="E_CNT" th:value="${e_Cnt}"/>
+  <input type="hidden" id="version" name="version" th:value="${session.version}"/>
+</form>
+<section id="container">
+
+  <!--헤더 아이콘 영역-->
+  <section id="header">
+    <div class="iconbox">
+
+      <div class="icon">
+        <div class="'leftbutton">
+          <a href="/"><img src="/images/event_1/page01_header/leftbutton.png" alt=""></a>
+        </div>
+        <div class="rightbutton">
+          <img src="/images/event_1/page01_header/rightbutton01.png" alt="">
+          <img src="/images/event_1/page01_header/rightbutton02.png" alt="">
+        </div>
+      </div>
+
+      <div class="logoimg">
+        <img src="/images/event_1/page01_header/logoimg.png" alt="">
+      </div>
+
+    </div>
+  </section>
+
+  <!--상단 탑 메뉴부터 튜나페 배너-->
+  <section id="section01">
+    <h1>Event</h1>
+
+    <div class="topmenu">
+      <a>전체</a>
+      <a>이벤트</a>
+      <a class="ov">체험단</a>
+      <a>카드혜택</a>
+    </div>
+
+    <div class="border"><img src="/images/event_1/page01_section01/border.png" alt=""></div>
+    <th:block th:if="${mainEvent.eventIng == 'N'}">
+      <div class="dday">마감</div>
+    </th:block>
+    <th:block th:unless="${mainEvent.eventIng == 'N'}">
+      <div class="dday" th:text="'D-' + ${mainEvent.eventIng}"></div>
+    </th:block>
+
+
+    <div class="textbox">
+      <div class="text02" th:text="${mainEvent.title}"></div>
+      <div class="text03" th:text="${mainEvent.start_Date} + '(' + ${mainEvent.start_Dy} + ') - ' + ${mainEvent.end_Date} + '(' + ${mainEvent.end_Dy} + ')'">
+      </div>
+      <div class="mark">
+        <th:block th:unless="${mainEvent.eventIng == 'N'}">
+          <div class="text01">응모중</div>
+          <div class="button"><img src="/images/event_1/page01_section01/button.png" alt=""></div>
+        </th:block>
+      </div>
+
+    </div>
+
+    <a th:href="'/experienceForm.do?event_Seq=' + ${mainEvent.event_Seq} + '&page=0&myContent=0&refreshNum=0'"><img class="bigbanner" th:src="'/images/event_1/page01_section01/' + ${mainEvent.img_Nm} + '.jpg'"></a>
+
+    <div class="clickbutton">
+      <div class="arrow">
+        <div class="arrow01"><img src="/images/event_1/page01_section01/leftarrow.png" alt=""></div>
+        <div class="arrow02"><img src="/images/event_1/page01_section01/rightarrow.png" alt=""></div>
+      </div>
+      <div class="dot"><img src="/images/event_1/page01_section01/dot.png" alt=""></div>
+    </div>
+
+    <div class="commentbox" id="dateTable">
+      <div class="commentbox_top">
+        <div class="icon01"><img src="/images/event_1/page01_section01/icon.png" alt=""></div>
+        <div>실시간 참여 댓글</div>
+        <div class="date" th:text="${now}"></div>
+        <div class="icon02"><img src="/images/event_1/page01_section01/icon02.png" alt="" onclick="loadTime()"></div>
+      </div>
+      <div class="commentbox_middle">
+        <div class="comment_slider_box">
+          <div class="img"><img src="/images/event_1/page01_section01/comment_img.png" alt=""></div>
+          <div class="visual_slider">
+            <th:block th:each="latestContent : ${latestContentList}">
+              <div class="text">
+                <div class="text01" th:text="${latestContent.name}"></div>
+                <div class="text02" th:text="${latestContent.content}"></div>
+              </div>
+            </th:block>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="line"><img src="/images/event_1/page01_section01/line.png" alt=""></div>
+
+  </section>
+
+  <section id="section02">
+    <div id="eventTable">
+      <h2>마감된 체험단</h2>
+      <div class="minibanner">
+        <th:block th:each="endEvent : ${endEventList}">
+          <div class="banner01">
+            <div>
+              <a th:href="'https://m.dongwonmall.com/event/experienceForm.do?E_SEQ='+ ${endEvent.event_Seq} +'&E_GBN_CD=01&pageStatus=&EW_SEQ=&ER_SEQ=&EEM_SEQ='"><img class="img01" th:src="'/images/event_1/page01_section02/'+ ${endEvent.img_Nm} + '.jpg'"></a>
+            </div>
+            <div class="text01">
+              <p class="box">종료</p>
+              <p class="txt01" th:text="${endEvent.title}"></p>
+              <p class="txt02" th:text="${endEvent.start_Date} + '(' + ${endEvent.start_Dy} + ') - ' + ${endEvent.end_Date} + '(' + ${endEvent.end_Dy} + ')'"></p>
+            </div>
+          </div>
+        </th:block>
+      </div>
+
+      <div class="topbutton"><img src="/images/event_1/page01_section02/topbutton.png" alt=""></div>
+      <th:block th:if="${listSize < eventCnt}">
+        <div class="bottombutton"><img src="/images/event_1/page01_section02/button03.png" alt="" th:onclick="|javascript:eventLoad('${e_Cnt + 5}')|"></div>
+      </th:block>
+
+
+
+      <!--섹션 2 끝나는 부분 단락 구분선-->
+      <div id="middlebox"></div>
+    </div>
+  </section>
+
+
+  <!--베스트리뷰-->
+  <section id="section03">
+    <h3>베스트 리뷰</h3>
+    <h4>전체보기></h4>
+
+    <div class="textbox">
+
+      <div class="text">
+        <div class="text01"><img src="/images/event_1/page01_section03/text01.png" alt=""></div>
+        <div class="text02"><img src="/images/event_1/page01_section03/text02.png" alt=""></div>
+      </div>
+      <div class="line">
+        <div class="line01"><img src="/images/event_1/page01_section03/line01.png" alt=""></div>
+        <div class="line02"><img src="/images/event_1/page01_section03/line02.png" alt=""></div>
+      </div>
+
+
+    </div>
+
+    <div class="swiper">
+      <div class="swiper-wrapper">
+        <div class="swiper-slide" style="width: 141px; margin-right: 15px; margin-left: 22px;">
+          <div class="box">
+            <div class="mark"><img src="/images/event_1/page01_section03/bestmark.png" alt=""></div>
+            <div class="icon"><img src="/images/event_1/page01_section03/icon.png" alt=""></div>
+            <div class="img01"><img src="/images/event_1/page01_section03/review-img-01.png" alt=""></div>
+            <div class="text01">
+              <p class="t01">동원 떡볶이의 신 2종으로
+                <br>
+                간편떡볶이 만들기
+              </p>
+              <p class="t02">ror*** | 2022.06.30</p>
+            </div>
+          </div>
+        </div>
+        <div class="swiper-slide" style="width: 141px; margin-right: 15px">
+          <div class="box">
+            <div class="mark"><img src="/images/event_1/page01_section03/bestmark.png" alt=""></div>
+            <div class="icon"><img src="/images/event_1/page01_section03/icon.png" alt=""></div>
+            <div class="img02"><img src="/images/event_1/page01_section03/review-img-02.png" alt=""></div>
+            <div class="text02">
+              <p class="t01">육즙좔좔
+                <br>
+                동원 딤섬 샤오룽바오!
+              </p>
+              <p class="t02">000*** | 2022.06.16</p>
+            </div>
+          </div>
+        </div>
+        <div class="swiper-slide" style="width: 141px; margin-right: 15px">
+          <div class="box">
+            <div class="mark"><img src="/images/event_1/page01_section03/bestmark.png" alt=""></div>
+            <div class="icon"><img src="/images/event_1/page01_section03/icon.png" alt=""></div>
+            <div class="img03"><img src="/images/event_1/page01_section03/review-img-03.png" alt=""></div>
+            <div class="text03">
+              <p class="t01">우리아이 장건강은
+                <br>
+                핑크퐁 키즈 프로바이오틱스
+              </p>
+              <p class="t02">aud*** | 2022.06.10</p>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+
+  </section>
+
+  <!--푸터-->
+  <section id="footer">
+    <div class="box01">
+      <div>고객센터</div>
+      <div>대량견적문의</div>
+      <div>명품김치상품권등록</div>
+    </div>
+
+    <div class="line01"><img src="/images/event_1/page01_section03/line.png" alt=""></div>
+
+    <div class="box02">
+      <div class="button"><img src="/images/event_1/footer/arrow.png" alt=""></div>
+      <div class="text01">(주)동원디어푸드</div>
+      <div class="text02">
+        <div>이용약관</div>
+        <div>개인정보처리방침</div>
+        <div>오류신고</div>
+      </div>
+      <div class="text03">Copyright 2021 Dongwon Dear Food Co.Ltd. All Rights Reserved.</div>
+    </div>
+
+    <div class="line02"><img src="/images/event_1/page01_section03/line.png" alt=""></div>
+
+    <div class="box03">
+      동원몰 내 일부 상품은 개별 판매자의 상품이 포함되어 있으며,
+      이 경우 동원 디어푸드는 통신판매의 당사자가 아니므로 해당
+      상품 거래 정보 및 거래에 대해서는 개별 판매자에 책임이
+      있습니다.
+    </div>
+
+  </section>
+
+</section>
+
+<!--하단gnb영역-->
+
+<section id="bottomgnb">
+
+  <div class="box">
+    <div class="background"><img src="/images/event_1/page01_bottomgnb/box.png" alt=""></div>
+    <div class="iconbox">
+      <div class="icon01"><img src="/images/event_1/page01_bottomgnb/icon01.png" alt=""></div>
+      <div class="icon02"><img src="/images/event_1/page01_bottomgnb/icon02.png" alt=""></div>
+      <div class="icon03"><img src="/images/event_1/page01_bottomgnb/icon03.png" alt=""></div>
+      <div class="icon04"><img src="/images/event_1/page01_bottomgnb/icon04.png" alt=""></div>
+    </div>
+
+    <div class="linebar"><img src="/images/event_1/page01_bottomgnb/line.png" alt=""></div>
+
+  </div>
+
+  <div class="home"><img src="/images/event_1/page01_bottomgnb/icon05.png" alt=""></div>
+
+</section>
+
+
+<script src="/js/event_1/plugin/gsap.js"></script>
+<script src="/js/event_1/plugin/scrollTrigger.js"></script>
+<script src="/js/event_1/scrollbar.js"></script>
+<script src="/js/event_1/setting.js"></script>
+
+<script src="/js/event_1/main.js"></script>
+
+<script src="/js/event_1/plugin/swiper.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/8.3.1/swiper-bundle.min.js"></script>
+<div id="slickEvent">
+  <script type="text/javascript">
+    $(document).ready(function (){
+      $(".visual_slider").slick({
+        dots: false, //navigation
+        arrows: false, //arrow
+        prevArrow: $('.prev'), //prev
+        nextArrow: $('.next'), //next
+        autoplay:true, // autoplay mode
+        autoplaySpeed: 2000, // auto speed
+        pauseOnHover:false, // pause on mouse hover
+        fade: false, //fade mode only one slider
+        speed: 1100, // speed
+        infinite: true, // infinite mode
+        // asNavFor: '.slider2', // another slider
+        centerMode: false, // center move
+        centerPadding: '0%', // center move padding
+        slidesToShow: 1, // show slider number
+        slidesToScroll: 1, // next slider number
+        swipe: true, // swiper
+        focusOnSelect: true, // click to slider
+        draggable:true,
+        vertical: true, // vertical slider
+        verticalSwiping: false, // vertical swiper
+        initialSlide:0,// slider number
+        cssEase: 'cubic-bezier(0.7, 0, 0.3, 1)', //css transition∑
+        variableWidth: false,
+        width: 236,
+        height: 46,
+      });
+    });
+  </script>
+</div>
+</body>
+
+</html>

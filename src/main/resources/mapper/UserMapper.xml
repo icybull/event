@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dongwonmall.event.user.domain">
+    <select id="chkUser" parameterType="user" resultType="user">
+        /* UserMapper.chkUser */
+        SELECT *
+        FROM USERS
+        WHERE PHONE_NO = #{phone_No}
+    </select>
+
+    <select id="chkContent" parameterType="user" resultType="int">
+        /* UserMapper.chkContent */
+        SELECT COUNT(*)
+        FROM USERS
+        WHERE USER_SEQ = #{user_Seq}
+            AND USEYN = 'Y'
+            AND CONTENT IS NOT NULL
+    </select>
+
+    <select id="chkRegUser" parameterType="int" resultType="int">
+        /* UserMapper.chkRegUser */
+        SELECT COUNT(*)
+        FROM USERS
+        WHERE USER_SEQ = #{user_Seq}
+    </select>
+<!--    merge로 바꾸기 / 있으면 USEYN Y로 UPDATE 없으면 INSERT    -->
+    <insert id="regUser" parameterType="user">
+        /* UserMapper.regUser */
+        MERGE INTO USERS
+            USING DUAL ON (NAME = #{name} AND PHONE_NO = #{phone_No})
+            WHEN NOT MATCHED THEN
+        INSERT (NAME, PHONE_NO, USEYN, GRD_CD, GRD_NM)
+        VALUES (#{name}, #{phone_No}, 'Y', '46', '씨앗')
+    </insert>
+
+    <select id="selUser" parameterType="user" resultType="user">
+        /* UserMapper.selUser */
+        SELECT *
+        FROM USERS
+        WHERE NAME = #{name}
+        AND PHONE_NO = #{phone_No}
+    </select>
+
+
+    <update id="regContent" parameterType="user">
+        /* UserMapper.regContent */
+        UPDATE USERS
+        SET CONTENT = #{content},
+            REG_DATETIME = SYSDATE,
+            EVENT_SEQ = #{event_Seq},
+            USEYN = 'Y'
+        WHERE USER_SEQ = #{user_Seq}
+    </update>
+
+    <select id="getContentsCnt" parameterType="product" resultType="int">
+        /* UserMapper.getContentsCnt */
+        SELECT COUNT(*)
+        FROM USERS
+        WHERE USEYN = 'Y'
+        AND EVENT_SEQ = #{event_Seq}
+    </select>
+    <select id="selContents" parameterType="product" resultType="user">
+        /* UserMapper.selContents */
+        SELECT B.USER_SEQ     AS user_Seq,
+               REPLACE(B.NAME, SUBSTR(B.NAME, 2, 1), '*')         AS name,
+               B.PHONE_NO     AS phone_No,
+               B.CONTENT      AS content,
+               B.GRD_CD       AS grd_Cd,
+               CASE B.GRD_CD
+                   WHEN 46 THEN 'icon01'
+                   WHEN 45 THEN 'icon02'
+                   WHEN 44 THEN 'icon04'
+                   WHEN 43 THEN 'icon03'
+                   ELSE 'icon05'
+                   END AS grd_Nm,
+               TO_CHAR(B.REG_DATETIME, 'YYYY-MM-DD')  AS reg_Datetime,
+               B.EVENT_SEQ    AS event_Seq
+        FROM
+            (
+                SELECT ROWNUM AS N, A.*
+                FROM (
+                    SELECT *
+                    FROM USERS
+                    ORDER BY REG_DATETIME DESC
+                     ) A
+                WHERE USEYN = 'Y'
+                AND EVENT_SEQ = #{event_Seq}
+                AND CONTENT IS NOT NULL
+            ) B
+        WHERE B.N BETWEEN #{start_N} AND #{end_N}
+    </select>
+
+    <select id="myContent" parameterType="user" resultType="user">
+        /* UserMapper.myContent */
+        SELECT USER_SEQ     AS user_Seq,
+               REPLACE(NAME, SUBSTR(NAME, 2, 1), '*')         AS name,
+               PHONE_NO     AS phone_No,
+               CONTENT      AS content,
+               GRD_CD       AS grd_Cd,
+               CASE GRD_CD
+                   WHEN 46 THEN 'icon01'
+                   WHEN 45 THEN 'icon02'
+                   WHEN 44 THEN 'icon04'
+                   WHEN 43 THEN 'icon03'
+                   ELSE 'icon05'
+                   END AS grd_Nm,
+               TO_CHAR(REG_DATETIME, 'YYYY-MM-DD')  AS reg_Datetime,
+               EVENT_SEQ    AS event_Seq
+        FROM USERS
+        WHERE USER_SEQ = #{user_Seq}
+            AND USEYN = 'Y'
+            AND CONTENT IS NOT NULL
+    </select>
+
+    <delete id="delContent" parameterType="user">
+        /* UserMapper.delContent */
+        UPDATE USERS
+        SET USEYN = 'N'
+        WHERE USER_SEQ = #{user_Seq}
+    </delete>
+
+    <!--   version 1 최신 댓글 가져오기   -->
+    <select id="getLatestContent" resultType="user">
+        /* UserMapper.getLatestContent */
+        SELECT A.USER_SEQ     AS user_Seq,
+               REPLACE(A.NAME, SUBSTR(A.NAME, 2, 1), '*')     AS name,
+               A.PHONE_NO     AS phone_No,
+               A.CONTENT      AS content,
+               TO_CHAR(A.REG_DATETIME, 'YYYY-MM-DD')  AS reg_Datetime,
+               A.EVENT_SEQ    AS event_Seq
+        FROM (
+                 SELECT *
+                 FROM USERS
+                 WHERE USEYN = 'Y'
+                 ORDER BY REG_DATETIME DESC
+             ) A
+        WHERE ROWNUM <![CDATA[<=]]> 5
+    </select>
+</mapper>
