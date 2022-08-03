@@ -8,7 +8,8 @@
     <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.4/dist/web/static/pretendard.css"/>
     <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/8.3.1/swiper-bundle.css"/>
-
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"/>
     <link rel="stylesheet" href="/css/event_3/list_common.css">
     <link rel="stylesheet" href="/css/event_3/list_detail.css">
     <script src="/js/event.js"></script>
@@ -19,6 +20,13 @@
     <input type="hidden" id="version" name="version" th:value="${session.version}"/>
 </form>
 <div id="wrap">
+    <div class="top-btn-area">
+        <a href="#">
+                <span class="material-symbols-outlined top-btn">
+                    expand_less
+                </span>
+        </a>
+    </div>
     <header class="header">
         <a href="/" class="arrow-back">
             <img class="arrow-back-icon" src="/images/event_3/arrow_back.png" alt="이전 페이지">
@@ -149,7 +157,7 @@
             <a href="#"><img src="/images/event_3/menu_category_2.png" alt="카테고리"></a>
             <a href="#"><img src="/images/event_3/menu_foryou_2.png" alt="Foryou"></a>
             <a href="#"><img src="/images/event_3/menu_home_2.png" alt="홈"></a>
-            <a href="#"><img src="/images/event_3/menu_my_2.png" alt="마아페이지"></a>
+            <a href="#"><img src="/images/event_3/menu_my_2.png" alt="마이페이지"></a>
             <a href="#"><img src="/images/event_3/menu_view_2.png" alt="최근 본 상품"></a>
         </section>
     </aside>

@@ -19,7 +19,6 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"
             integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
             crossorigin="anonymous"></script>
-    <!--    <script src="/js/event_1/plugin/jquery-1.8.1.min.js"></script>-->
     <script src="/js/event_1/plugin/slick.min.js"></script>
     <script src="/js/event_1/plugin/easing.js"></script>
     <script src="/js/experience.js"></script>
@@ -238,8 +237,8 @@
                             <input type="hidden" id="event_Seq" name="event_Seq" th:value="${event.event_Seq}"/>
                             <input type="hidden" id="user_Seq" name="user_Seq" th:value="${session.user_Seq}"/>
                             <div class="reply-write">
-                                <textarea id="content" name="content" style="width: 293px; height: 120px; padding: 10px 10px;" class="commentbox" placeholder="SNS 또는 블로그 주소와 응모 사유를 작성해주세요." onkeyup="lenthCheck()"></textarea>
-                                <span class="write-cnt" id="textLengthCheck"> 0 / 500자</span>
+                                <textarea id="content" name="content" style="width: 293px; height: 120px; padding: 10px 10px; color: #4B4B4B;" class="commentbox" placeholder="SNS 또는 블로그 주소와 응모 사유를 작성해주세요."></textarea>
+                                <span class="write-cnt">0 / 500자</span>
                             </div>
                             <div class="commentbox-button" onclick="contentReg()"><img src="/images/event_1/page02_section03/button03.png" alt=""></div>
                         </form>

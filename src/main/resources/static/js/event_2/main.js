@@ -105,3 +105,17 @@ function hasScrolled() {
 
   lastScrollTop = st;
 }
+
+// 중간탭메뉴 - .event-tab
+const topmenu = $(".event-tab li");
+const headerHeight = $('.header-top').height()+10;
+const tabHeight = $('.event-tab').height()+10;
+
+topmenu.click(function (e) {
+  e.preventDefault();
+  let target = $(this);
+  let index = target.index();
+  let section = $(".section").eq(index);
+  let offset = section.offset().top;
+  $("html,body").animate({ scrollTop: offset-headerHeight-tabHeight }, 500);
+});

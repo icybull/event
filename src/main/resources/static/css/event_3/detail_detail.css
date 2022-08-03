@@ -5,11 +5,26 @@
 
 /* 동원몰 로고 있는 파란 헤더1 시작 */
 .header_1 {
+    font-family: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
     background: #00AEFF;
     height: 48px;
+    width: 360px;
     position: relative;
     display: flex;
     align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 10000;
+    transition: top 0.2s ease-in-out;
+}
+.nav-up {
+    top: -48px;
+}
+
+.header {
+    padding-top: 48px;
 }
 
 .header_1.dwmall_logo {
@@ -96,6 +111,7 @@
 }
 
 h1 {
+    font-family: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
     font-size: 16px;
     font-weight: 400;
     margin-left: 104px;
@@ -244,16 +260,13 @@ h1 {
     margin-top: 40px;
 }
 
+.rel-item-area {
+    margin-left: 20px;
+}
+
 .rel-item-img-1 {
     width: 112px;
     height: 112px;
-    margin-left: 20px;
-    box-shadow: 0px 1px 6px rgba(0, 0, 0, .16);
-}
-.rel-item-img-2 {
-    width: 112px;
-    height: 112px;
-    margin-left: 14px;
     box-shadow: 0px 1px 6px rgba(0, 0, 0, .16);
 }
 
@@ -263,33 +276,14 @@ h1 {
     line-height: 18px;
     display: block;
     position: absolute;
-    margin-left: 20px;
     margin-top: 12px;
 }
 
-.rel-item-name-2 {
-    font-size: 14px;
-    font-weight: 400;
-    line-height: 18px;
-    margin-left: 20px;
-    display: block;
-    position: absolute;
-    margin-top: 12px;
-}
 
 .rel-item-price-1 {
     font-size: 16px;
     font-weight: 600;
     position: absolute;
-    margin-left: 20px;
-    margin-top: 56px;
-}
-
-.rel-item-price-2 {
-    font-size: 16px;
-    font-weight: 600;
-    position: absolute;
-    margin-left: 20px;
     margin-top: 56px;
 }
 
@@ -298,18 +292,12 @@ h1 {
     display: block;
     margin-top: 20px;
     margin-bottom: 70px;
-}
-
-.rel-item-2-area {
-    position: relative;
-    display: inline-block;
-    margin-top: 20px;
-    margin-bottom: 70px;
+    margin-right: 16px;
 }
 
 .material-symbols-outlined.cart-cir-icon-1 {
     position: absolute;
-    left: 91px;
+    left: 71px;
     top: 70px;
     font-size: 20px;
     font-weight: 300;
@@ -324,22 +312,6 @@ h1 {
     box-shadow: 1px 3px 3px rgba(0, 0, 0, .22);
 }
 
-.material-symbols-outlined.cart-cir-icon-2 {
-    position: absolute;
-    left: 91px;
-    top: 70px;
-    font-size: 20px;
-    font-weight: 300;
-    text-align: center;
-    line-height: 31px;
-    color: #00AEFF;
-    width: 30px;
-    height: 30px;
-    border: 1.5px solid #00AEFF;
-    border-radius: 50%;
-    background-color: #ffffff;
-    box-shadow: 1px 3px 3px rgba(0, 0, 0, .22);
-}
 /* 관련상품 부분 끝 */
 
 /* 우수 리뷰 리워드 배너 시작 */
@@ -730,14 +702,14 @@ textarea::placeholder {
 .comment-bottom-text {
     display: flex;
     align-items: center;
-    line-height: 22px;
+    line-height: 23px;
 }
 
 .comment-date {
     font-size: 13px;
     font-weight: 300;
     color: #808080;
-    margin-right: 210px;
+    margin-right: 198px;
 }
 
 .material-symbols-outlined.cmt-edit-icon {
@@ -827,6 +799,7 @@ textarea::placeholder {
     bottom: 0;
     left: 0;
     border-radius: 20px 20px 0 0;
+    z-index: 10000;
 }
 
 .bottom-menu {
@@ -856,4 +829,21 @@ textarea::placeholder {
 
 .bottom-menu a:nth-child(4) img {
    margin-top: 1px;
+}
+.material-symbols-outlined.top-btn {
+    top: 668px;
+    left: 306px;
+    position: fixed;
+    font-size: 32px;
+    font-weight: 200;
+    text-align: center;
+    line-height: 31px;
+    color: #00AEFF;
+    background: #ffffff;
+    width: 32px;
+    height: 32px;
+    border-radius: 50px;
+    border: 1px solid #00AEFF;
+    box-shadow: 1px 3px 3px rgba(0, 0, 0, .22);
+    z-index: 10000;
 }

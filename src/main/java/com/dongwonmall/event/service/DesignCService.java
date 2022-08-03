@@ -12,6 +12,8 @@ import java.util.List;
 
 @Service
 public class DesignCService implements DesignService {
+
+    private final String DESIGN_VERSION = "3";
     private final EventService eventService;
 
     public DesignCService(EventService eventService) {

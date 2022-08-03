@@ -61,21 +61,23 @@ public class EventController {
      */
     @GetMapping("/event/main.do")
     public String main(HttpServletRequest request, Model model, @RequestParam("E_CNT") int e_Cnt, @RequestParam("version") int version) {
-        HttpSession session = request.getSession();
-        session.setAttribute("version", version);
+        try{
+            HttpSession session = request.getSession();
+            session.setAttribute("version", version);
 
-        DesignService designerService =
-                version == 1 ? designAService :
-                version == 2 ? designBService :
-                version == 3 ? designCService :
-                null;
-        if(designerService == null) return "redirect:/";
-        List<Event> eventList = eventService.selAllEvent(e_Cnt);
-        String event_Seq = eventList.get(0).getEvent_Seq();
-        int eventCnt = eventService.selEventCnt();
+            DesignService designerService = version == 1 ? designAService : version == 2 ? designBService : version == 3 ? designCService : null;
+            List<Event> eventList = eventService.selAllEvent(e_Cnt);
+            String event_Seq = eventList.get(0).getEvent_Seq();
+            int eventCnt = eventService.selEventCnt();
 
-        designerService.setCommonMainModel(model, eventList, e_Cnt, eventCnt);
-        return designerService.setRestMainModel(model, eventList, event_Seq);
+            designerService.setCommonMainModel(model, eventList, e_Cnt, eventCnt);
+            return designerService.setRestMainModel(model, eventList, event_Seq);
+        } catch(NullPointerException e){
+            logger.info("NullPointerException으로 인한 redirect:/");
+            return "error";
+        } catch (Exception e){
+            return "error";
+        }
     }
 
 
@@ -87,25 +89,24 @@ public class EventController {
      */
     @GetMapping("/experienceForm.do")
     public String detail(HttpServletRequest request, Model model, Product product, @RequestParam("page") int page, @RequestParam("myContent") int myContent) {
-        HttpSession session = request.getSession();
-        // 세션 값 없으면 index로 리다이렉트
-        if (session.getAttribute("version") == null) {
-            return "redirect:/";
-        }
-        // 사용자 등록, 댓글 등록 여부 확인 - 있으면 user_seq / 없으면 0
-        String user_Seq = userService.chkRegUser(session);
-        int version = Integer.parseInt(session.getAttribute("version").toString());
-        DesignService designerService =
-                version == 1 ? designAService :
-                version == 2 ? designBService :
-                version == 3 ? designCService :
-                null;
-        if(designerService == null) return "redirect:/";
-        List<Product> prodList = eventService.selRelProduct(product);
-        List<User> contentList = userService.selContents(myContent, product, page, user_Seq);
+        try{
+            HttpSession session = request.getSession();
+            // 세션 값 없으면 index로 리다이렉트
+            if (session.getAttribute("version") == null) {
+                return "redirect:/";
+            }
+            // 사용자 등록, 댓글 등록 여부 확인 - 있으면 user_seq / 없으면 0
+            String user_Seq = userService.chkRegUser(session);
+            int version = Integer.parseInt(session.getAttribute("version").toString());
+            DesignService designerService = version == 1 ? designAService : version == 2 ? designBService : version == 3 ? designCService : null;
+            List<Product> prodList = eventService.selRelProduct(product);
+            List<User> contentList = userService.selContents(myContent, product, page, user_Seq);
 
-        designerService.setCommonDetailModel(session, userService, eventService, model, contentList, product, page, myContent);
-        return designerService.setRestDetailModel(eventService, model, prodList, contentList, product);
+            designerService.setCommonDetailModel(session, userService, eventService, model, contentList, product, page, myContent);
+            return designerService.setRestDetailModel(eventService, model, prodList, contentList, product);
+        } catch(Exception e){
+            return "error";
+        }
     }
 
     /**

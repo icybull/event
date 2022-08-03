@@ -84,6 +84,7 @@
 }
 
 .page-title {
+    font-family: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
     font-size: 18px;
     font-weight: 400;
     margin-left: 16px;
@@ -199,7 +200,7 @@
 .slick-dots {
     position: absolute;
     display: flex;
-    bottom: 10;
+    bottom: 10px;
     margin-left: 21px;
     top: -28px;
 }
@@ -220,20 +221,33 @@
     background: #00AEFF;
 }
 
+.ing-rel-box {
+    margin-left: 20px;
+    position: relative;
+}
+
 .ing-rel-box li {
     width: 230px;
     height: 70px;
     background: white;
     margin-top: 16px;
-    margin-left: 4px;
     position: relative;
+}
+
+.ing-rel-box li::after {
+    content: '';
+    display: inline-block;
+    width: 1px;
+    height: 70px;
+    background: #d1d1d1;
+    position: absolute;
+    margin-left: 35px
 }
 
 .rel-item-img {
     width: 68px;
     height: 68px;
     border: 1px solid #d1d1d1;
-    margin-left: 17px;
 }
 
 .ing-item-name {
@@ -253,21 +267,11 @@
 }
 
 .cart-cir-icon {
+    position: absolute;
     width: 25px;
     height: 25px;
-    float: right;
-    margin-right: 19px;
-    margin-top: 9px;
-}
-
-.ing-rel-box li:nth-child(1)::after {
-    content: '';
-    display: inline-block;
-    width: 1px;
-    height: 70px;
-    background: #d1d1d1;
-    position: absolute;
-    margin-left: 37px;
+    right: 35px;
+    margin-top: 44px;
 }
 
 .end-title {
@@ -494,20 +498,21 @@
 
 .bottom-tab {
     width: 360px;
-    height: 66px;
+    height: 58px;
     background: #00AEFF;
     align-items: center;
     position: fixed;
     bottom: 0;
     left: 0;
+    border-radius: 20px 20px 0 0;
+    z-index: 10000;
 }
-
 
 .bottom-menu {
     display: flex;
     align-items: center;
     justify-content: space-evenly;
-    height: 66px;
+    height: 58px;
     width: 360px;
 }
 
@@ -517,14 +522,36 @@
     padding: 0 8px;
 }
 
+.bottom-menu a:nth-child(1) img {
+    margin-top: 2px;
+}
+
 .bottom-menu a:nth-child(3) img {
-    width: 50px;
-    height: 50px;
+    width: 46px;
+    height: 46px;
+    border-radius: 50px;
     margin-top: 2.4px;
 }
 
 .bottom-menu a:nth-child(4) img {
-   margin-top: 1px;
+    margin-top: 1px;
+}
+.material-symbols-outlined.top-btn {
+    top: 668px;
+    left: 306px;
+    position: fixed;
+    font-size: 32px;
+    font-weight: 200;
+    text-align: center;
+    line-height: 31px;
+    color: #00AEFF;
+    background: #ffffff;
+    width: 32px;
+    height: 32px;
+    border-radius: 50px;
+    border: 1px solid #00AEFF;
+    box-shadow: 1px 3px 3px rgba(0, 0, 0, .22);
+    z-index: 10000;
 }
 
 

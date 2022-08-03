@@ -38,7 +38,7 @@
 }
 
 #ing-content{
-    margin-top:30.556vw;
+    padding-top:30.556vw;
 }
 .ing-event-img .date-count{
     top:8.333vw;
@@ -428,7 +428,6 @@
 .reply-box.show-all{
     padding:1rem 3.889vw 0;
 }
-
 .reply-mine{
     font-size:3.333vw;
     padding:1.111vw 2.222vw;
@@ -454,9 +453,6 @@
 
 
 /* footer */
-footer{
-    margin-top:50px;
-}
 #back-to-top{
     width:13.333vw;
     height:13.333vw;
@@ -467,6 +463,157 @@ footer{
     font-weight:200;
     color:#fafafa;
 }
-.footer-nav-01{
-    padding:5.556vw 0;
+
+/* css 추가 */
+.join-board{
+    padding-top:10vw;
 }
+.reply-reg textarea{
+    color:#444444;
+ }
+.reply-reg textarea:focus-visible{
+    outline:none;
+ }
+.reply-reg .reg-btn{
+    height:16.667vw;
+    line-height:16.667vw;
+    background-color:var(--dw-blue);
+    padding:0;
+    border-radius:11.111vw;
+    color:#ffffff;
+    font-weight:500;
+    font-size:100%;
+    margin-top:.8rem;
+}
+
+.review-write{
+    padding:2em 0 0.1em;
+    margin:0;
+}
+
+#main-banner .section2{
+    position:relative;
+    width:100%;
+    height:100%;
+}
+#main-banner .section2>img{
+    z-index:22;
+    position:absolute;
+    top:0;
+    left:0;
+    height:auto;
+    display:block;
+}
+#main-banner .section2-slider{
+    padding:76vw 0 0;
+}
+#main-banner .section2-slider img{
+    width:95%;
+    margin:0 auto;
+}
+
+.section3{
+    background:url(../images/detail-src/section3-bg.png) no-repeat center top / 100%;
+    width:100%;
+    height:100%;
+}
+.section3 .section3-typo{
+    width:50%;
+    margin:15.278vw auto 11.111vw;
+    padding-top:15.278vw;
+}
+.section3-text1>img,.section3-text2>img{
+    width:60%;
+}
+.section3-text2{
+    text-align:right;
+    padding-top:7.333vw;
+    padding-bottom:24vw;
+}
+.section3-text1>p,.section3-text2>p{
+    font-size:3.711vw;
+    padding:2.5vw;
+    margin:2vw 0;
+    background-color:#ffffff;
+    border-radius:2.222vw;
+    display:inline-block;
+    position:relative;
+}
+.section3-text2>p{
+    background-color:#f0e201;
+}
+.section3-text1>p::after{
+    content:'';
+    display:block;
+    width:5.833vw;
+    height:5.278vw;
+    background:url(../images/detail-src/section3-word-bottom01.png) no-repeat center center/100%;
+    position:absolute;
+    bottom:-4px;
+    left:0;
+    z-index:-1;
+}
+.section3-text2>p::after{
+    content:'';
+    display:block;
+    width:5.833vw;
+    height:5.278vw;
+    background:url(../images/detail-src/section3-word-bottom02.png) no-repeat center center/100%;
+    position:absolute;
+    bottom:-4px;
+    right:0;
+    z-index:-1;
+}
+.section4 .point1{
+    text-align:center;
+    width:100%;
+    margin:0 auto;
+}
+.section4 .point1 img:nth-of-type(1){
+    width:53%;
+}
+.section4 .point1 img:nth-of-type(2){
+    width:85%;
+    border-radius: 50%;
+    margin:10vw 0;
+}
+.section4 .point1 img:nth-of-type(3){
+    width:82%;
+    margin-bottom:17vw;
+}
+
+
+
+/* 스크롤 css */
+.show-up{
+    opacity:0;
+}
+.show-up.active{
+    animation:move-up .8s forwards;
+}
+.show-up.active.delay{
+    animation-delay:1.3s;
+}
+.show-up.active.delay-1{
+    animation-delay:1.8s;
+}
+.show-up.active.delay-2{
+    animation-delay:2.3s;
+}
+.show-up.active.delay-3{
+    animation-delay:2.8s;
+}
+.show-up.active.delay-4{
+    animation-delay:3.3s;
+}
+.show-up.active.delay-5{
+    animation-delay:3.8s;
+}
+
+
+@keyframes move-up {
+    0%{opacity:.1;transform:translateY(5rem);}
+    100%{opacity:1;transform:translateY(0);}
+}
+
+
